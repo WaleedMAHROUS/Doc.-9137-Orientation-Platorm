@@ -328,6 +328,62 @@
         .ft-nt { opacity:.55; font-weight:600; text-transform:none; letter-spacing:0; }
         .footer-link i { font-size:11px; }
         .embed-notice strong { color:#fff; }
+        /* ── v11: frame-aware layout ─────────────────────────────── */
+        #fontControls { top:88px; bottom:auto !important; }
+        html.in-frame body { min-height:0 !important; }
+        html.fv { overflow-x:hidden; }
+        html.fv .sbs-modal, html.fv #aboutModal { position:absolute; inset:auto; left:0; width:100%; top:var(--fv-top,0px); height:var(--fv-h,100vh); }
+        html.fv .sbs-card, html.fv #aboutCard { max-height:calc(var(--fv-h,100vh) * 0.9); }
+        html.fv .rc-report-card { height:calc(var(--fv-h,100vh) * 0.9); }
+        html.fv .app-dlg { padding-top:calc(var(--fv-h,100vh) * 0.12); }
+        html.fv #toastContainer { position:absolute; top:calc(var(--fv-top,0px) + 80px); }
+        html.fv #fontControls { position:absolute; }
+        html.fv #mobileNav { position:absolute; bottom:auto; top:calc(var(--fv-top,0px) + var(--fv-h,100vh) - 64px); }
+        /* ── v11: WHMP builder ───────────────────────────────────── */
+        .wb-steps { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+        .wb-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 10px 5px 6px; border-radius:999px; background:#1e293b; border:1px solid #334155; color:#94a3b8; font-size:0.7rem; font-weight:700; cursor:pointer; }
+        .wb-chip b { width:22px; height:22px; border-radius:50%; background:#0f172a; color:#cbd5e1; display:inline-flex; align-items:center; justify-content:center; font-size:0.65rem; }
+        .wb-chip span { display:none; }
+        @media (min-width:640px) { .wb-chip span { display:inline; } }
+        .wb-chip:hover { border-color:#f59e0b; }
+        .wb-chip.cur { border-color:#f59e0b; color:#fff; background:#2a1f0a; }
+        .wb-chip.cur b { background:#f59e0b; color:#0f172a; }
+        .wb-chip.done b { background:#059669; color:#fff; }
+        .wb-progress { height:6px; background:#1e293b; border-radius:6px; overflow:hidden; margin-top:16px; }
+        .wb-progress span { display:block; height:100%; width:0; background:linear-gradient(90deg,#f59e0b,#10b981); transition:width .3s; }
+        .wb-head { display:flex; gap:12px; align-items:center; margin-bottom:14px; }
+        .wb-num { flex:none; width:40px; height:40px; border-radius:12px; background:rgba(245,158,11,0.15); color:#fbbf24; font-weight:900; display:inline-flex; align-items:center; justify-content:center; }
+        .wb-title { font-size:1.25rem; font-weight:900; color:#fff; line-height:1.2; }
+        .wb-clause { font-size:0.7rem; color:#64748b; font-weight:700; margin-top:2px; }
+        .wb-expect { border:1px solid rgba(56,189,248,0.25); background:rgba(56,189,248,0.06); border-radius:12px; padding:10px 14px; margin-bottom:16px; font-size:0.8125rem; color:#cbd5e1; }
+        .wb-expect summary { cursor:pointer; font-size:0.625rem; font-weight:900; letter-spacing:0.12em; text-transform:uppercase; color:#38bdf8; min-height:28px; display:flex; align-items:center; }
+        .wb-expect ul { list-style:none; padding:0; margin:8px 0 2px; } .wb-expect li { margin:8px 0; line-height:1.6; }
+        .wb-field { margin-bottom:18px; border:0; padding:0; min-width:0; }
+        .wb-lab { display:block; font-size:0.72rem; font-weight:800; color:#cbd5e1; margin-bottom:6px; }
+        .wb-hint { font-size:0.72rem; color:#64748b; margin:0 0 6px; line-height:1.5; }
+        .wb-in { width:100%; background:#0b1220; border:1px solid #334155; border-radius:10px; padding:10px 12px; color:#f1f5f9; font-size:0.875rem; line-height:1.5; font-family:inherit; }
+        .wb-in:focus { outline:none; border-color:#f59e0b; box-shadow:0 0 0 2px rgba(245,158,11,0.2); }
+        textarea.wb-in { resize:vertical; min-height:84px; }
+        .wb-bar { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0; }
+        .wb-checks { display:grid; gap:6px; grid-template-columns:1fr; }
+        @media (min-width:760px) { .wb-checks { grid-template-columns:1fr 1fr; } }
+        .wb-chk { display:flex; gap:10px; align-items:flex-start; padding:9px 12px; border:1px solid #1e293b; border-radius:10px; background:#0b1220; font-size:0.78rem; color:#cbd5e1; cursor:pointer; line-height:1.45; }
+        .wb-chk input { margin-top:3px; accent-color:#f59e0b; flex:none; width:16px; height:16px; }
+        .wb-chk:has(input:checked) { border-color:rgba(245,158,11,0.5); background:rgba(245,158,11,0.07); }
+        .wb-row { border:1px solid #1e293b; border-radius:14px; background:#0b1220; padding:12px; margin-bottom:12px; }
+        .wb-row.is-ex { border-style:dashed; border-color:#475569; }
+        .wb-row-h { display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:0.8rem; color:#fff; }
+        .wb-ex { font-size:0.6rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; padding:2px 8px; border-radius:999px; background:rgba(56,189,248,0.15); color:#7dd3fc; }
+        .wb-del { margin-left:auto; color:#64748b; padding:6px 8px; border-radius:8px; cursor:pointer; }
+        .wb-del:hover { color:#f87171; background:rgba(239,68,68,0.1); }
+        .wb-row-g { display:grid; gap:10px; grid-template-columns:1fr; }
+        @media (min-width:760px) { .wb-row-g { grid-template-columns:1fr 1fr; } .wb-cell.wide { grid-column:1 / -1; } }
+        .wb-nav { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:26px; padding-top:16px; border-top:1px solid #1e293b; }
+        .wb-min { display:grid; gap:6px; }
+        .wb-minrow { display:flex; align-items:center; gap:10px; text-align:left; padding:9px 12px; border-radius:10px; border:1px solid #1e293b; background:#0b1220; cursor:pointer; color:#cbd5e1; font-size:0.8rem; }
+        .wb-minrow b { width:24px; height:24px; border-radius:50%; background:#1e293b; display:inline-flex; align-items:center; justify-content:center; font-size:0.7rem; color:#94a3b8; flex:none; }
+        .wb-minrow span { flex:1; } .wb-minrow i { font-style:normal; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:#fbbf24; }
+        .wb-minrow.ok b { background:#059669; color:#fff; } .wb-minrow.ok i { color:#34d399; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -410,7 +466,7 @@
                     <summary><span class="ab-ico bg-rose-500/15 text-rose-400"><i class="fa-solid fa-lock"></i></span><span class="ab-title">Your data and privacy</span><i class="fa-solid fa-chevron-down ab-chev"></i></summary>
                     <div class="ab-body">
                         <ul class="ab-list">
-                            <li><i class="fa-solid fa-check"></i>Your progress, risk calculator register and settings are stored in <strong class="text-white">your browser, on this device</strong>. They are not uploaded for the training or the calculator.</li>
+                            <li><i class="fa-solid fa-check"></i>Your progress, risk calculator register, WHMP draft and settings are stored in <strong class="text-white">your browser, on this device</strong>. They are not uploaded for the training or the calculator.</li>
                             <li><i class="fa-solid fa-check"></i>Use <strong class="text-white">Export JSON</strong> in the calculator to keep a backup file, or to import it later on another device.</li>
                             <li><i class="fa-solid fa-check"></i>Registration details are sent to the platform owner so that your registration can be recorded.</li>
                             <li><i class="fa-solid fa-check"></i><strong class="text-white">Log out and reset</strong> erases the data stored in this browser. Export a backup first if you want to keep it.</li>
@@ -560,7 +616,7 @@
             <div class="px-6 py-5 space-y-4 text-sm text-slate-300 leading-relaxed">
                 <p id="storeInfoState" class="text-xs bg-slate-800 border border-slate-700 rounded-lg px-3 py-2"></p>
                 <div><h3 class="text-amber-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Where</h3>
-                    <p>In <strong class="text-white">your browser, on this device</strong>, in what the browser calls local storage. It is <strong class="text-white">not uploaded</strong> anywhere. StopBIRDSTRIKE cannot see your register and cannot recover it for you.</p></div>
+                    <p>In <strong class="text-white">your browser, on this device</strong>, in what the browser calls local storage. It is <strong class="text-white">not uploaded</strong> anywhere. StopBIRDSTRIKE cannot see your register or your WHMP draft, and cannot recover them for you.</p></div>
                 <div><h3 class="text-amber-400 text-[10px] font-black uppercase tracking-widest mb-1.5">How</h3>
                     <p>The page saves automatically every time you add, edit or remove a species. It is still there after you close the tab or restart the device.</p></div>
                 <div class="warning-callout"><h3 class="text-rose-300 text-[10px] font-black uppercase tracking-widest mb-1.5">It can disappear if you</h3>
@@ -635,7 +691,7 @@
         </div>
     </header>
     <div id="embedNotice" class="embed-notice" hidden>
-        <p><strong>Viewing inside a web page?</strong> For reliable saving and the best layout, open the platform in a new browser tab.</p>
+        <p id="embedMsg"><strong>Viewing inside a web page?</strong> For reliable saving and the best layout, open the platform in a new browser tab.</p>
         <div><a id="embedOpen" href="#" target="_blank" rel="noopener" class="rc-btn rc-btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open in a new tab</a><button type="button" onclick="embedDismiss()" class="rc-btn rc-btn-ghost">Hide this message</button></div>
     </div>
 
@@ -999,6 +1055,7 @@
                                 <span class="rc-tool"><button id="rcCsvBtn" class="rc-btn rc-btn-ghost" onclick="rcDownloadCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button><span class="rc-info" tabindex="0" role="button" aria-label="About CSV"><i>i</i><span class="rc-pop" role="tooltip"><strong>CSV.</strong> Downloads the ranked list as a spreadsheet file you can open in Excel or Google Sheets. It cannot be imported back; use Export JSON for that.</span></span></span>
                                 <button id="rcCopyBtn" class="rc-btn rc-btn-ghost" onclick="rcCopySummary()"><i class="fa-regular fa-copy"></i> Copy summary</button>
                                 <button id="rcClearBtn" class="rc-btn rc-btn-ghost" onclick="rcClear()"><i class="fa-solid fa-trash"></i> Clear</button>
+                                <button id="rcWhmpBtn" class="rc-btn rc-btn-ghost" onclick="wbOpenWithRisk()"><i class="fa-solid fa-file-contract"></i> Use in WHMP builder</button>
                             </div>
                             <div id="rcStatus" class="rc-status"></div>
                             <input type="file" id="rcImportFile" accept="application/json,.json" class="hidden" onchange="rcImportChosen(this)">
@@ -1026,6 +1083,7 @@
                         </div>
                         <div class="flex items-center gap-2 flex-wrap">
                             <button onclick="openCalculator()" class="rc-btn rc-btn-primary"><i class="fa-solid fa-calculator"></i> Open the calculator</button>
+                            <button onclick="openWhmp()" class="rc-btn rc-btn-ghost"><i class="fa-solid fa-file-contract"></i> Build your WHMP</button>
                         </div>
                     </div>
                 </div>
@@ -1328,6 +1386,39 @@
                                 <a href="https://waleedmahrous.com/book-an-appointment-for-a-wildlife-hazard-management-consultation" target="_blank" rel="noopener" class="rc-btn rc-btn-ghost"><i class="fa-solid fa-calendar-check"></i> Book a free consultation</a>
                             </div>
                         </section>
+                    </div>
+                </div>
+            </div>
+            <!-- ═══ WHMP BUILDER ═══ -->
+            <div id="view-whmp" class="flex flex-col h-full fade-in hidden">
+                <div class="p-5 md:p-8 border-b border-slate-800 bg-slate-900">
+                    <div class="flex items-start justify-between gap-3 flex-wrap">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                <span class="bg-amber-500/10 text-amber-400 text-[10px] font-bold px-2.5 py-1 rounded-md border border-amber-500/20 uppercase tracking-widest">WHMP Builder</span>
+                                <span class="text-[10px] text-slate-500 font-mono tracking-widest">ICAO Doc 9137 Part 3 &bull; Chapter 9</span>
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">Build your Wildlife Hazard Management Programme</h2>
+                            <p class="text-sm text-slate-400 mt-2 max-w-2xl leading-relaxed">Work through the steps below. They follow the minimum contents of Clause 9.1.1.6. Your answers are saved automatically in this browser, and the builder produces a draft document that you can review, adapt and approve.</p>
+                        </div>
+                    </div>
+                    <div class="rc-tools mt-5" role="toolbar" aria-label="WHMP tools">
+                        <span class="rc-tool"><button id="wbPdfBtn" class="rc-btn rc-btn-primary" onclick="wbPreview()"><i class="fa-solid fa-file-pdf"></i> Preview and PDF</button><span class="rc-info" tabindex="0" role="button" aria-label="About the preview and PDF"><i>i</i><span class="rc-pop" role="tooltip"><strong>Preview and PDF.</strong> Builds your WHMP as a document with a cover page, contents, the sections you filled in, and three appendices. In the print window choose Save as PDF. Items you have not completed are marked in the document.</span></span></span>
+                        <span class="rc-tool"><button id="wbDocBtn" class="rc-btn rc-btn-ghost" onclick="wbDownloadDoc()"><i class="fa-solid fa-file-word"></i> Word</button><span class="rc-info" tabindex="0" role="button" aria-label="About the Word download"><i>i</i><span class="rc-pop" role="tooltip"><strong>Word.</strong> Downloads the same document as a file that opens in Word, so that you can edit and format it. Check the layout after you open it.</span></span></span>
+                        <span class="rc-tool"><button id="wbJsonBtn" class="rc-btn rc-btn-ghost" onclick="wbExportJson()"><i class="fa-solid fa-file-export"></i> Export JSON</button><span class="rc-info" tabindex="0" role="button" aria-label="About Export JSON"><i>i</i><span class="rc-pop" role="tooltip"><strong>Export JSON.</strong> Saves your whole draft to a small .json backup file on your device. Use it to keep a safe copy, to continue on another device, or to share the draft with a colleague. Nothing is uploaded.</span></span></span>
+                        <span class="rc-tool"><button id="wbImportBtn" class="rc-btn rc-btn-ghost" onclick="wbImportClick()"><i class="fa-solid fa-file-import"></i> Import JSON</button><span class="rc-info" tabindex="0" role="button" aria-label="About Import JSON"><i>i</i><span class="rc-pop" role="tooltip"><strong>Import JSON.</strong> Loads a draft from a .json file that you exported earlier, or that a colleague sent you. It replaces the draft in this browser, so export a backup first if you want to keep what you have.</span></span></span>
+                        <button id="wbResetBtn" class="rc-btn rc-btn-ghost" onclick="wbResetDraft()"><i class="fa-solid fa-trash"></i> Erase draft</button>
+                    </div>
+                    <input type="file" id="wbImportFile" accept="application/json,.json" class="hidden" onchange="wbImportChosen(this)">
+                    <div class="wb-progress" aria-hidden="true"><span id="wbBar"></span></div>
+                    <p id="wbProgTxt" class="text-[11px] text-slate-500 font-bold mt-2"></p>
+                    <div id="wbStatus" class="rc-status mt-3"></div>
+                </div>
+                <div class="p-3 sm:p-5 md:p-8 flex-1 bg-slate-950">
+                    <div class="max-w-4xl mx-auto">
+                        <nav id="wbSteps" class="wb-steps" aria-label="WHMP steps"></nav>
+                        <div id="wbStep"></div>
+                        <div id="wbNav" class="wb-nav"></div>
                     </div>
                 </div>
             </div>
@@ -2116,6 +2207,10 @@
                 <p class="text-xs text-amber-300 mb-4"><strong>Clause 9.4.6:</strong> The ultimate effectiveness of a CAA's oversight system is measured by the number of aerodromes that have implemented a successful WHMP.</p>
                 <div class="info-callout">
                     <p class="text-xs text-amber-300"><strong>WHMP Review Triggers (Clause 9.1.1.5):</strong> The WHMP must be reviewed when: planned land use changes occur; a significant strike event happens; new wildlife species are observed; operational changes are made. Annual review is the MINIMUM — these events trigger unscheduled reviews.</p>
+                </div>
+                <div class="flex items-center justify-between gap-3 flex-wrap bg-slate-800 border border-amber-900/50 rounded-xl p-4 mt-4">
+                    <div><p class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-1">Build your own</p><p class="text-xs text-slate-400">Work through the ten minimum contents of Clause 9.1.1.6 with the WHMP builder, and download a draft for your aerodrome.</p></div>
+                    <div class="flex gap-2 flex-wrap"><button onclick="openWhmp()" class="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-xs uppercase tracking-widest transition flex items-center"><i class="fa-solid fa-file-contract mr-2"></i>Open the WHMP builder</button></div>
                 </div>
             `,
             questions: [
@@ -3838,6 +3933,7 @@
     }
 
     function showToast(msg, type='info') {
+        if (typeof fvUpdate === 'function') fvUpdate();
         const c = document.getElementById('toastContainer');
         const t = document.createElement('div');
         const colors = { success:'bg-emerald-600 border-emerald-500', error:'bg-rose-700 border-rose-600', info:'bg-slate-700 border-slate-600', warning:'bg-amber-600 border-amber-500' };
@@ -3946,9 +4042,13 @@
             '<div class="flex-1 min-w-0"><p class="text-xs font-bold text-white truncate">Risk Calculator</p><p class="text-[10px] text-slate-500 truncate">Chapter 3 tool</p></div></button>' +
             '<button id="navGuideBtn" onclick="openMethodGuide()" class="w-full text-left flex items-center space-x-3 px-4 py-3 rounded-xl transition-all hover:bg-slate-800 cursor-pointer">' +
             '<div class="w-8 h-8 rounded-lg flex items-center justify-center bg-sky-500/15 text-sky-400 border border-sky-500/30 shrink-0"><i class="fa-solid fa-book-open text-xs"></i></div>' +
-            '<div class="flex-1 min-w-0"><p class="text-xs font-bold text-white truncate">Method Guide</p><p class="text-[10px] text-slate-500 truncate">How risk is calculated</p></div></button>';
+            '<div class="flex-1 min-w-0"><p class="text-xs font-bold text-white truncate">Method Guide</p><p class="text-[10px] text-slate-500 truncate">How risk is calculated</p></div></button>' +
+            '<button id="navWhmpBtn" onclick="openWhmp()" class="w-full text-left flex items-center space-x-3 px-4 py-3 rounded-xl transition-all hover:bg-slate-800 cursor-pointer">' +
+            '<div class="w-8 h-8 rounded-lg flex items-center justify-center bg-amber-500/15 text-amber-400 border border-amber-500/30 shrink-0"><i class="fa-solid fa-file-contract text-xs"></i></div>' +
+            '<div class="flex-1 min-w-0"><p class="text-xs font-bold text-white truncate">WHMP Builder</p><p class="text-[10px] text-slate-500 truncate">Chapter 9 tool</p></div></button>';
         if (STATE.currentViewContext && STATE.currentViewContext.type === 'calculator') document.getElementById('navCalcBtn').classList.add('nav-item-active');
         if (STATE.currentViewContext && STATE.currentViewContext.type === 'method') document.getElementById('navGuideBtn').classList.add('nav-item-active');
+        if (STATE.currentViewContext && STATE.currentViewContext.type === 'whmp') document.getElementById('navWhmpBtn').classList.add('nav-item-active');
         updateProgressDisplay();
     }
 
@@ -3963,7 +4063,7 @@
 
     // ─── VIEWS ───────────────────────────────────────────────────────────────
     function hideAllViews() {
-        ['onboarding','learning','quiz','feedback','master-config','certificate','calculator','method'].forEach(v => {
+        ['onboarding','learning','quiz','feedback','master-config','certificate','calculator','method','whmp'].forEach(v => {
             document.getElementById('view-'+v).classList.add('hidden');
         });
     }
@@ -4255,6 +4355,7 @@
         sbsStorage.removeItem('sbs_pending_reg');
         sbsStorage.removeItem('sbs_delivery_log');
         sbsStorage.removeItem('sbs_known_emails');
+        wbResetAll();
         rcResetAll();
         // Wipe full STATE object in memory
         STATE.user = null;
@@ -4406,12 +4507,6 @@
   "cat": "ICAO Doc 9137"
  },
  {
-  "text": "NTSB: US Airways Flight 1549 hit a flock of birds at 2,818 ft above ground level, about 4.5 miles from the approach end of runway 22 at LaGuardia and about 2 minutes after departure. The A320 ditched in the Hudson River about 8.5 miles from the airport.",
-  "src": "NTSB Aircraft Accident Report NTSB/AAR-10/03, US Airways Flight 1549 (2010; copy hosted by FAA), pp. xv and 2",
-  "url": "https://www.faa.gov/sites/faa.gov/files/2025-04/usair_a320.pdf",
-  "cat": "NTSB investigation"
- },
- {
   "text": "US strike reporting is voluntary, so the true number of strikes is not known. The FAA estimated reporting at about 91% for commercial transport aircraft at Part 139 airports in 2009 to 2013 (93% for damaging strikes), and lower for general aviation.",
   "src": "FAA/USDA, Wildlife Strikes to Civil Aircraft in the United States, 1990-2025 (Serial Report No. 32, Aug 2026), pp. 14 and 24",
   "url": "https://www.faa.gov/airports/airport_safety/wildlife/arp-Wildlife-Strike-Report-1990-2025.pdf",
@@ -4464,12 +4559,6 @@
   "src": "ICAO Doc 9137, Part 3, 5th Edition (2020), Clause 2.4.3 (footnote 1) and Clause 4.4.2",
   "url": "",
   "cat": "ICAO Doc 9137"
- },
- {
-  "text": "All 155 people aboard Flight 1549 (150 passengers, including a lap-held child, and 5 crew) survived. The NTSB found the probable cause was the ingestion of large birds into each engine, causing an almost total loss of thrust in both engines.",
-  "src": "NTSB Aircraft Accident Report NTSB/AAR-10/03, US Airways Flight 1549 (2010; copy hosted by FAA), pp. xv and 6",
-  "url": "https://www.faa.gov/sites/faa.gov/files/2025-04/usair_a320.pdf",
-  "cat": "NTSB investigation"
  },
  {
   "text": "In the USA, 54% of bird strikes from 1990 to 2025 occurred between July and October, when birds are migrating and populations peak after nesting. For deer, 38% of strikes fall between September and November.",
@@ -4526,12 +4615,6 @@
   "cat": "ICAO Doc 9137"
  },
  {
-  "text": "NTSB: the Flight 1549 engines were certificated in 1996. The large-flocking-bird test added in 2007 applies only to engines with inlet areas above 3,875 sq in. The accident engine's inlet area was 3,077 sq in, so it was exempt.",
-  "src": "NTSB Aircraft Accident Report NTSB/AAR-10/03, US Airways Flight 1549 (2010; copy hosted by FAA), pp. 14 and 16 to 19",
-  "url": "https://www.faa.gov/sites/faa.gov/files/2025-04/usair_a320.pdf",
-  "cat": "NTSB investigation"
- },
- {
   "text": "In the FAA database, 89 civil aircraft were destroyed or damaged beyond repair by wildlife strikes between 1990 and 2025. Small general aviation aircraft made up 59 (66%) of them, and terrestrial mammals, mainly white-tailed deer, caused 35 (39%).",
   "src": "FAA/USDA, Wildlife Strikes to Civil Aircraft in the United States, 1990-2025 (Serial Report No. 32, Aug 2026), p. 13",
   "url": "https://www.faa.gov/airports/airport_safety/wildlife/arp-Wildlife-Strike-Report-1990-2025.pdf",
@@ -4586,12 +4669,6 @@
   "cat": "ICAO Doc 9137"
  },
  {
-  "text": "NTSB: radar recorded 14,614 primary targets in the 20 minutes around the strike, and 1,716 were classified as correlated. The departure controller had chosen to display only correlated targets, so the flock's radar returns were not shown.",
-  "src": "NTSB Aircraft Accident Report NTSB/AAR-10/03, US Airways Flight 1549 (2010; copy hosted by FAA), p. 29",
-  "url": "https://www.faa.gov/sites/faa.gov/files/2025-04/usair_a320.pdf",
-  "cat": "NTSB investigation"
- },
- {
   "text": "At US Part 139 airports, the damaging strike rate below 1,500 ft AGL has not increased since 2000, but damaging strikes above 1,500 ft have. The report reads this as progress in airport programmes and a lack of progress outside the airport environment.",
   "src": "FAA/USDA, Wildlife Strikes to Civil Aircraft in the United States, 1990-2025 (Serial Report No. 32, Aug 2026), p. 6",
   "url": "https://www.faa.gov/airports/airport_safety/wildlife/arp-Wildlife-Strike-Report-1990-2025.pdf",
@@ -4638,12 +4715,6 @@
   "src": "FAA/USDA, Wildlife Strikes to Civil Aircraft in the United States, 1990-2025 (Serial Report No. 32, Aug 2026), p. 15",
   "url": "https://www.faa.gov/airports/airport_safety/wildlife/arp-Wildlife-Strike-Report-1990-2025.pdf",
   "cat": "FAA / USDA data"
- },
- {
-  "text": "NTSB: FAA guidance at the time had airports consider wildlife attractants within 10,000 ft, and out to 5 statute miles if they could move wildlife into approach or departure airspace. An FAA representative said the Flight 1549 strike was well outside the area LaGuardia's wildlife plan was expected to cover.",
-  "src": "NTSB Aircraft Accident Report NTSB/AAR-10/03, US Airways Flight 1549 (2010; copy hosted by FAA), pp. 25 and 26",
-  "url": "https://www.faa.gov/sites/faa.gov/files/2025-04/usair_a320.pdf",
-  "cat": "NTSB investigation"
  },
  {
   "text": "In 1965, about 94% of the 1,037 turbine-powered transport aircraft in the USA had three or four engines. In 2022, only 3% of the 8,162 aircraft did.",
@@ -4827,6 +4898,7 @@
 
     // ─── ABOUT MODAL ──────────────────────────────────────────────────────────
     function openAbout() {
+        if (typeof fvUpdate === 'function') fvUpdate();
         const m = document.getElementById('aboutModal');
         m.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -5324,7 +5396,8 @@
     }
 
     // ── help modal ────────────────────────────────────────────────────────────
-    function openCalcHelp() { rcEl('calcHelp').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function openCalcHelp() {
+        if (typeof fvUpdate === 'function') fvUpdate(); rcEl('calcHelp').classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeCalcHelp() { rcEl('calcHelp').classList.remove('open'); if (!rcEl('aboutModal').classList.contains('open')) document.body.style.overflow = ''; }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCalcHelp(); });
 
@@ -5388,6 +5461,7 @@
         if (!_rcSessionNote) { _rcSessionNote = true; showToast('Saved in this browser. Export a backup file to keep it safe.', 'info'); }
     }
     function openStoreInfo(first) {
+        if (typeof fvUpdate === 'function') fvUpdate();
         const m = rcEl('storeInfo'); if (!m) return;
         const st = rcEl('storeInfoState');
         if (st) st.innerHTML = window.__sbsStore.persistent
@@ -5558,9 +5632,10 @@
             '<div class="foot">Prepared with the StopBIRDSTRIKE Risk Calculator &middot; waleedmahrous.com &middot; Data in this report were entered by the user and stored only on their device.</div></div></body></html>';
     }
     function openReport() {
+        if (typeof fvUpdate === 'function') fvUpdate();
         if (!RC.reg.length) { showToast('Add at least one species first.', 'warning'); return; }
         const f = rcEl('rcReportFrame'), m = rcEl('rcReportModal'); if (!f || !m) return;
-        f.srcdoc = rcReportHtml(); m.classList.add('open'); document.body.style.overflow = 'hidden';
+        RPT_BUILDER = rcReportHtml; f.srcdoc = rcReportHtml(); m.classList.add('open'); document.body.style.overflow = 'hidden';
     }
     function closeReport() { const m = rcEl('rcReportModal'); if (m) m.classList.remove('open'); if (!rcEl('aboutModal').classList.contains('open')) document.body.style.overflow = ''; }
     function rcReportPrint() {
@@ -5569,7 +5644,7 @@
     }
     function rcReportNewTab() {
         try {
-            const url = URL.createObjectURL(new Blob([rcReportHtml()], { type: 'text/html' }));
+            const url = URL.createObjectURL(new Blob([(RPT_BUILDER || rcReportHtml)()], { type: 'text/html' }));
             const w = window.open(url, '_blank');
             if (!w) showToast('Your browser blocked the new tab. Allow pop-ups for this page, or use Print or save as PDF here.', 'warning');
             setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
@@ -5619,6 +5694,7 @@
     // ─── IN-APP DIALOGS (v8) ──────────────────────────────────────────────────────
     let _dlgFinish = null;
     function appDialog(o) {
+        if (typeof fvUpdate === 'function') fvUpdate();
         return new Promise(function (resolve) {
             const wrap = document.getElementById('appDialog');
             if (!wrap) { resolve('cancel'); return; }
@@ -5650,72 +5726,573 @@
 
     // ─── EMBEDDED-PAGE NOTICE (v8) ────────────────────────────────────────────────
     function embedInit() {
-        let inFrame = false; try { inFrame = window.self !== window.top; } catch (e) { inFrame = true; }
-        const n = document.getElementById('embedNotice'); if (!inFrame || !n) return;
-        const link = document.getElementById('embedOpen');
+        if (!FV.inFrame) return;
+        document.documentElement.classList.add('in-frame');
+        const n = document.getElementById('embedNotice'), link = document.getElementById('embedOpen'), msg = document.getElementById('embedMsg');
+        if (!n) return;
+        const sameSite = !!FV.frameEl, saves = window.__sbsStore.persistent;
+        if (sameSite && saves) return;                       // saving works and the layout follows the host page: nothing to explain
         const url = /^https?:/i.test(location.href) ? location.href.split('#')[0] : '';
-        if (link) { if (url) link.href = url; else link.style.display = 'none'; }
-        n.hidden = false; document.documentElement.classList.add('in-frame');
+        if (url) { link.href = url; if (msg) msg.innerHTML = '<strong>Viewing inside a web page?</strong> For reliable saving and the best layout, open the platform in a new browser tab.'; }
+        else { link.style.display = 'none'; if (msg) msg.innerHTML = '<strong>Saving may be limited here.</strong> Use Export JSON in the risk calculator to keep a backup of your work.'; }
+        n.hidden = false;
     }
     function embedDismiss() { const n = document.getElementById('embedNotice'); if (n) n.hidden = true; }
 
-    // ─── MOVABLE TEXT-SIZE CONTROLS (v8): drag the grip up or down ────────────────
-    const FC_POS_KEY = 'sbs_font_pos';
-    function fcLimits(el) {
-        const hdr = document.querySelector('header');
-        const lo = (hdr ? hdr.getBoundingClientRect().bottom : 0) + 6;
-        const reserve = window.innerWidth < 1024 ? 72 : 8;
-        const hi = window.innerHeight - el.offsetHeight - reserve;
-        return { lo: lo, hi: Math.max(lo, hi) };
+    // ─── FRAME-AWARE VIEWPORT (v11) ────────────────────────────────────────────────
+    // Hosts such as website builders often show the platform in an iframe that grows to the full height of the content.
+    // The HOST page then scrolls, not this document, so window.scrollTo does nothing and "fixed" elements sit far away.
+    // When the host is on the same site we read which part of the platform is on screen and follow it.
+    const FV = { on: false, top: 0, h: 0, frameEl: null, parentWin: null, inFrame: false, raf: 0 };
+    let _scrollToken = 0, _userMoved = false, _lastY = 0;
+    function fvInit() {
+        try { FV.inFrame = window.self !== window.top; } catch (e) { FV.inFrame = true; }
+        if (!FV.inFrame) return;
+        try { FV.frameEl = window.frameElement; FV.parentWin = window.parent; void FV.parentWin.document; } catch (e) { FV.frameEl = null; FV.parentWin = null; }
+        if (!FV.frameEl || !FV.parentWin) return;
+        const kick = function () { if (FV.raf) return; FV.raf = requestAnimationFrame(function () { FV.raf = 0; fvUpdate(); }); };
+        try { FV.parentWin.addEventListener('scroll', kick, { passive: true }); FV.parentWin.addEventListener('resize', kick); } catch (e) {}
+        ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (ev) { try { FV.parentWin.addEventListener(ev, function () { _userMoved = true; }, { passive: true }); } catch (e) {} });
+        window.addEventListener('resize', kick);
+        if (window.ResizeObserver) { try { new ResizeObserver(kick).observe(document.documentElement); } catch (e) {} }
+        fvUpdate();
     }
-    function fcPlace(topPx, save) {
-        const el = document.getElementById('fontControls'); if (!el) return null;
-        const L = fcLimits(el), t = Math.min(Math.max(topPx, L.lo), L.hi);
-        el.style.top = t + 'px'; el.style.bottom = 'auto';
-        if (save) { try { sbsStorage.setItem(FC_POS_KEY, String(t / window.innerHeight)); } catch (e) {} }
-        return t;
+    function fvVars() { const s = document.documentElement.style; s.setProperty('--fv-top', FV.top + 'px'); s.setProperty('--fv-h', FV.h + 'px'); }
+    function fvUpdate() {
+        if (!FV.frameEl || !FV.parentWin) return;
+        let r, ph;
+        try { r = FV.frameEl.getBoundingClientRect(); ph = FV.parentWin.innerHeight; } catch (e) { return; }
+        const noInnerScroll = document.documentElement.scrollHeight - window.innerHeight < 4;
+        // hysteresis: while the host is still making room for a new page the document scrolls inside the frame for a moment; that must not switch the mode off
+        const tall = FV.on ? (r.height > ph + 80) : (r.height > ph + 80 && noInnerScroll);
+        if (tall !== FV.on) { FV.on = tall; document.documentElement.classList.toggle('fv', tall); }
+        if (!FV.on) { FV.top = 0; FV.h = window.innerHeight; fvVars(); fcApply(); return; }
+        const top = Math.max(0, -r.top), bottom = Math.min(r.height, ph - r.top);
+        FV.top = Math.min(top, Math.max(0, r.height - 240)); FV.h = Math.max(240, bottom - FV.top);
+        fvVars(); fcApply();
     }
-    function fcReset() {
+
+    // Put the start of the current view at the top of the host screen. A tall page needs a moment before the host has made room for it,
+    // so the alignment is repeated a few times, and it stops as soon as the page is moved by anything else (the visitor, or the host).
+    function fvAlign(narrow) {
+        try {
+            const sec = document.querySelector('main > section');
+            const y = (narrow && sec) ? sec.getBoundingClientRect().top + (window.pageYOffset || 0) : 0;
+            const targetTop = FV.frameEl.getBoundingClientRect().top + y;       // where the view starts in the host screen right now
+            if (narrow ? Math.abs(targetTop - 8) > 6 : targetTop < 0) FV.parentWin.scrollTo({ top: Math.max(0, (FV.parentWin.pageYOffset || 0) + targetTop - 8), behavior: 'auto' });
+            _lastY = FV.parentWin.pageYOffset || 0;
+        } catch (e) {}
+    }
+    function scrollToContent() {
+        if (window.__sbsBooting) return;                                 // never move the host page while the platform is still loading
+        const sec = document.querySelector('main > section'), hdr = document.querySelector('header');
+        const narrow = window.innerWidth < 1024;
+        if (FV.inFrame) fvUpdate();
+        if (FV.on) {                                                     // tall embed: move the host page
+            _userMoved = false; const tok = ++_scrollToken; try { _lastY = FV.parentWin.pageYOffset || 0; } catch (e) {}
+            fvAlign(narrow);
+            [120, 350, 800, 1500].forEach(function (ms) {
+                setTimeout(function () {
+                    if (tok !== _scrollToken || _userMoved) return;
+                    try { if (Math.abs((FV.parentWin.pageYOffset || 0) - _lastY) > 3) { _userMoved = true; return; } } catch (e) { return; }
+                    fvUpdate(); fvAlign(narrow);
+                }, ms);
+            });
+            return;
+        }
+        let y = 0;                                                       // where the view starts, in this document
+        if (narrow && sec) y = sec.getBoundingClientRect().top + (window.pageYOffset || 0) - 8;
+        const hh = (!FV.inFrame && hdr) ? hdr.offsetHeight : 0;          // a sticky header covers the top of a normal page
+        window.scrollTo({ top: Math.max(0, narrow && sec ? y - hh : 0), behavior: 'auto' });
+        if (FV.inFrame) { try { (narrow && sec ? sec : document.body).scrollIntoView({ block: 'start', behavior: 'auto' }); } catch (e) {} }
+    }
+
+    // ─── MOVABLE TEXT-SIZE CONTROLS (v11): start under the header, drag up or down ──
+    const FC_POS_KEY = 'sbs_font_pos2';
+    const FC = { off: null };
+    function fcVisibleH() { return FV.on ? FV.h : window.innerHeight; }
+    function fcDefaultOff() { const hdr = document.querySelector('header'); return (hdr ? hdr.getBoundingClientRect().height : 72) + 12; }
+    function fcLimits(el) { const reserve = window.innerWidth < 1024 ? 76 : 8; return { lo: 8, hi: Math.max(8, fcVisibleH() - el.offsetHeight - reserve) }; }
+    function fcApply() {
         const el = document.getElementById('fontControls'); if (!el) return;
-        el.style.top = ''; el.style.bottom = ''; try { sbsStorage.removeItem(FC_POS_KEY); } catch (e) {}
+        if (FC.off === null) FC.off = fcDefaultOff();
+        const L = fcLimits(el); FC.off = Math.min(Math.max(FC.off, L.lo), L.hi);
+        el.style.bottom = 'auto'; el.style.top = ((FV.on ? FV.top : 0) + FC.off) + 'px';
     }
+    function fcSave() { try { sbsStorage.setItem(FC_POS_KEY, String(FC.off / fcVisibleH())); } catch (e) {} }
+    function fcPlace(off, save) { FC.off = off; fcApply(); if (save) fcSave(); return FC.off; }
+    function fcReset() { FC.off = null; try { sbsStorage.removeItem(FC_POS_KEY); } catch (e) {} fcApply(); }
     function fcInit() {
         const el = document.getElementById('fontControls'), grip = document.getElementById('fontGrip'); if (!el || !grip) return;
-        const restore = function () { const f = parseFloat(sbsStorage.getItem(FC_POS_KEY)); if (!isNaN(f)) fcPlace(f * window.innerHeight, false); };
-        restore();
-        window.addEventListener('resize', function () { if (el.style.top) restore(); });
+        const f = parseFloat(sbsStorage.getItem(FC_POS_KEY)); if (!isNaN(f) && f >= 0 && f <= 1) FC.off = f * fcVisibleH();
+        fcApply();
+        window.addEventListener('resize', fcApply); window.addEventListener('load', fcApply);
         let drag = null;
         grip.addEventListener('pointerdown', function (e) {
-            e.preventDefault();
-            drag = { y: e.clientY, top: el.getBoundingClientRect().top, id: e.pointerId };
+            e.preventDefault(); drag = { y: e.clientY, off: FC.off, id: e.pointerId };
             try { grip.setPointerCapture(e.pointerId); } catch (err) {}
             el.classList.add('dragging');
         });
-        grip.addEventListener('pointermove', function (e) { if (drag && e.pointerId === drag.id) fcPlace(drag.top + (e.clientY - drag.y), false); });
-        const end = function () {
-            if (!drag) return; drag = null; el.classList.remove('dragging');
-            const t = parseFloat(el.style.top); if (!isNaN(t)) { try { sbsStorage.setItem(FC_POS_KEY, String(t / window.innerHeight)); } catch (e) {} }
-        };
+        grip.addEventListener('pointermove', function (e) { if (drag && e.pointerId === drag.id) fcPlace(drag.off + (e.clientY - drag.y), false); });
+        const end = function () { if (!drag) return; drag = null; el.classList.remove('dragging'); fcSave(); };
         grip.addEventListener('pointerup', end); grip.addEventListener('pointercancel', end);
         grip.addEventListener('dblclick', fcReset);
         grip.addEventListener('keydown', function (e) {
-            const step = e.shiftKey ? 80 : 24, cur = el.getBoundingClientRect().top;
-            if (e.key === 'ArrowUp') { e.preventDefault(); fcPlace(cur - step, true); }
-            else if (e.key === 'ArrowDown') { e.preventDefault(); fcPlace(cur + step, true); }
+            const step = e.shiftKey ? 80 : 24;
+            if (e.key === 'ArrowUp') { e.preventDefault(); fcPlace(FC.off - step, true); }
+            else if (e.key === 'ArrowDown') { e.preventDefault(); fcPlace(FC.off + step, true); }
             else if (e.key === 'Home' || e.key === 'Escape') { e.preventDefault(); fcReset(); }
         });
     }
 
-    // ─── SCROLL TO CONTENT (v6) ───────────────────────────────────────────────
-    function scrollToContent() {
-        const sec = document.querySelector('main > section');
-        if (window.innerWidth < 1024 && sec) {
-            const hdr = document.querySelector('header');
-            const y = sec.getBoundingClientRect().top + (window.pageYOffset || 0) - (hdr ? hdr.offsetHeight : 0) - 8;
-            window.scrollTo({ behavior: 'auto', top: Math.max(0, y) });
-        } else {
-            window.scrollTo({ behavior: 'auto', top: 0 });
+    // ─── WHMP BUILDER (v11): structure follows ICAO Doc 9137 Part 3, Chapter 9 ─────────────────────
+    const WB_KEY = 'sbs_whmp_draft', WB_META_KEY = 'sbs_whmp_meta';
+    const WB = { d: {}, step: 0, timer: 0 };
+    const WB_COVER = ['All operating hours', 'Part of the operating hours', 'On call'];
+    const WB_TASKS = ['Develop and implement the WHMP', 'Oversee the daily activities', 'Record wildlife (presence and movements)', 'Record and analyse the collected data (observations, strikes)', 'Carry out periodic surveys, wildlife studies and safety risk assessments', 'Manage the habitat to reduce the attractiveness of identified areas', 'Expel, deter and remove hazardous wildlife', 'Report wildlife strikes to the CAA and ICAO', 'Coordinate with stakeholders and external entities', 'Evaluate and update the WHMP as needed', 'Any other task involved in wildlife hazard management'];
+    const WB_TOPICS = ['Nature and extent of the wildlife management problem', 'Management of hazardous wildlife and their habitat', 'National and local regulations, standards and guidance material', 'Overview of the aerodrome WHMP', 'Wildlife ecology and biology', 'Wildlife identification and observation, including field guides and survey methods', 'Protected species, including related regulations and policies', 'Documentation, identification and reporting of wildlife strikes', 'Off-aerodrome land use issues', 'Wildlife removal techniques', 'Safe use of firearms and hazardous materials', 'Stakeholder involvement', 'Awareness and outreach programmes', 'Basic principles of the safety management system (SMS)'];
+    const WB_LEADING = ['Presence of wildlife at the aerodrome', 'Completeness of wildlife strike reports', 'Completeness of wildlife management logs', 'Percentage of wildlife species identified in strike events', 'Percentage of personnel receiving wildlife management training', 'Percentage of wildlife management actions completed', 'Frequency of meetings of wildlife committees'];
+    const WB_LAGGING = ['Number of wildlife strikes related to aircraft movements', 'Percentage of strikes resulting in damage or effect on flight'];
+    const WB_SELFEVAL = ['Proper implementation of tasks and responsibilities regarding wildlife control', 'Adequate functioning of communication protocols', 'Correct identification of the most hazardous species and attracting areas, with information updated periodically', 'Effective collection and recording of data (including the protocol for collecting animal remains and identification of wildlife strikes)', 'Accuracy and effectiveness of the reporting system', 'State of implementation and effectiveness of each mitigation measure', 'Periodic coordination with stakeholders (wildlife local committees, working groups and so on) according to schedule', 'Wildlife training taking place according to schedule'];
+    const WB_QUESTIONS = ['Are wildlife management roles, tasks and responsibilities adequately established at the aerodrome? Is the wildlife manager or coordinator considered in the WHMP?', 'Is there a proper communication procedure between the different stakeholders to alert about the presence of strikes with wildlife?', 'Are the wildlife management personnel aware of the species that pose a risk to air traffic and of attractive areas for wildlife at the aerodrome and its vicinity?', 'Are wildlife observations and strikes recorded and reported properly? What is the average identification of species in wildlife strikes?', 'Does the WHMP include an appropriate wildlife risk assessment conducted by competent personnel?', 'Are habitat management measures and measures of dispersion and extraction of wildlife taken at the aerodrome? Is the effectiveness of these measures measured?', 'Is there coordination with external stakeholders? Are regular meetings held with them? Is the local wildlife committee effective?', 'Is training on wildlife management given to personnel involved in wildlife management, at all levels?', 'Is the self-evaluation of the WHMP being performed?'];
+    const WB_STARTER = {
+        risk_method: 'Risk is assessed for each wildlife species as the probability of a strike multiplied by the severity of damage that might reasonably occur (ICAO Doc 9137 Part 3, Clause 3.1.4). Probability is estimated from recorded strikes and from the presence, location and behaviour of each species (Clause 3.2.1). Severity is estimated from the damage recorded or, where there is no damage history, from body mass and flocking behaviour (Clauses 3.3.2 and 3.3.5). The two are combined in a risk matrix, and each species is placed at Level 1 (Acceptable), Level 2 (Tolerable) or Level 3 (Intolerable) (Clause 3.4.3). The assessment is carried out by [name or post of the competent personnel] and is reviewed at least annually, and after a significant wildlife strike event (Clause 3.4.1).',
+        disp_proc: 'Wildlife is dispersed by trained personnel using human-operated (active) control, which Doc 9137 states is more effective than automated (static) scaring systems (Clause 5.1.7). Patrol routes and timing are randomised (Clause 5.2.4). Distress-call equipment is operated manually (Clause 5.3.2.10). The means used are: [list the means and the personnel responsible]. Lethal means are used only where appropriate and in line with national rules: [state the legal basis and who authorises their use].',
+        train_proc: 'Wildlife control personnel and those responsible for developing and implementing the WHMP receive initial training from competent wildlife hazard control personnel or specialists with proven experience (Clause 7.1.1). Personnel complete a training programme and are tested, and the results are recorded and kept on file (Clause 7.1.3). Recurrent training is carried out at least every two years (Clause 7.1.4). Training covers the topics selected below (Clause 7.2.1). Training records are kept by [post].',
+        eval_proc: 'The aerodrome operator evaluates the effectiveness of the WHMP at least annually (Clause 9.2.1) and carries out the self-evaluation of the aspects selected below periodically (Clause 9.1.8). The evaluation uses the questions in Appendix A. Where an answer is negative or unclear, measures are established to address the shortcoming (Clause 9.2.3). The results are reported to [post].'
+    };
+    const WB_STEPS = [
+        { id: 'doc', short: 'Details', title: 'Aerodrome and document details', letter: '', clause: 'Clauses 9.1.1.1, 9.1.1.5, 9.1.2.2',
+          expects: [['Clause 9.1.1.1', 'A WHMP is developed from the wildlife hazard risk assessment, according to the size and complexity of the aerodrome.'], ['Clause 9.1.2.2', 'The aerodrome operator appoints a wildlife manager or coordinator who coordinates all tasks related to wildlife hazard management.'], ['Clause 9.1.1.5', 'The WHMP is reviewed when changes to wildlife hazards are observed (for example planned land use changes, a significant strike event, a new species observed or operational changes) and, at a minimum, annually.']],
+          fields: [
+            { id: 'aerodrome', label: 'Aerodrome name', type: 'text', req: true, ph: 'e.g. Example International Airport' },
+            { id: 'icao', label: 'ICAO location indicator (optional)', type: 'text', max: 8 },
+            { id: 'operator', label: 'Aerodrome operator', type: 'text', req: true },
+            { id: 'country', label: 'Country or State', type: 'text' },
+            { id: 'accountable', label: 'Accountable manager (name and title)', type: 'text' },
+            { id: 'wm_name', label: 'Wildlife manager or coordinator (name)', type: 'text', req: true },
+            { id: 'wm_contact', label: 'Contact details of the wildlife manager or coordinator', type: 'text' },
+            { id: 'version', label: 'Document version', type: 'text', max: 12 },
+            { id: 'issue_date', label: 'Date of issue', type: 'date' },
+            { id: 'review_date', label: 'Next review due (at least annually)', type: 'date' },
+            { id: 'size_note', label: 'Size and complexity of the aerodrome', type: 'textarea', rows: 3, hint: 'The programme is scaled to the size and complexity of the aerodrome (Clause 9.1.1.1).' },
+            { id: 'triggers', label: 'Events that trigger a review in addition to the annual one', type: 'checks', options: ['Planned land use changes', 'A significant strike event', 'A new wildlife species observed', 'Operational changes', 'Other change in wildlife hazards'] }] },
+        { id: 'org', short: 'Organisation', title: 'Organisation of the WHMP', letter: 'a', clause: 'Clause 9.1.1.6 a',
+          expects: [['Clause 9.1.1.2', 'The aerodrome establishes procedures for data collection, risk analysis and the implementation of wildlife control measures, with competently trained personnel and well-defined roles and responsibilities.'], ['Clause 9.1.1.3', 'The WHMP does not only cover internal actions. For it to be effective, different stakeholders and external entities need to be involved throughout its development.']],
+          fields: [
+            { id: 'org_desc', label: 'Description of the organisation of the WHMP', type: 'textarea', rows: 6, req: true, hint: 'Explain how the programme is organised: who owns it, and how wildlife control, data recording, risk assessment, mitigation, stakeholder coordination, training and evaluation fit together.' },
+            { id: 'org_stake', label: 'How internal and external stakeholders are involved in developing and running the WHMP', type: 'textarea', rows: 4 },
+            { id: 'org_line', label: 'Reporting line of the wildlife manager or coordinator', type: 'text' }] },
+        { id: 'roles', short: 'Roles', title: 'Roles and tasks of aerodrome personnel', letter: 'b', clause: 'Clauses 9.1.1.6 b, 9.1.2',
+          expects: [['Clause 9.1.2.1', 'The WHMP details the roles and tasks of all aerodrome personnel who develop and implement it, oversee daily activities, record wildlife, analyse data, carry out surveys and risk assessments, manage habitat, expel, deter and remove wildlife, report strikes to the CAA and ICAO, coordinate with stakeholders and evaluate and update the WHMP.'], ['Clause 9.1.2.2', 'A wildlife manager or coordinator is appointed.'], ['Clause 9.1.2.3', 'If wildlife control personnel do not cover the operating hours of the aerodrome, the WHMP indicates which groups are in charge of wildlife control in their absence.']],
+          fields: [
+            { id: 'roles', label: 'Roles', type: 'table', req: true, reqCol: 'holder', rowLabel: 'Role', preset: 'roles', hint: 'Use the button to add the roles that Doc 9137 describes in Chapter 2, then edit them to match your aerodrome.',
+              cols: [{ k: 'role', label: 'Role or post', max: 120 }, { k: 'holder', label: 'Name or post-holder', max: 120 }, { k: 'tasks', label: 'Tasks', type: 'textarea', max: 900 }, { k: 'cover', label: 'Hours covered', type: 'select', options: WB_COVER }] },
+            { id: 'tasks_covered', label: 'Tasks from Clause 9.1.2.1 that the roles above cover', type: 'checks', options: WB_TASKS, hint: 'Any task you leave unticked has no owner. The review step will flag it.' },
+            { id: 'cover_absent', label: 'Who is in charge of wildlife control outside the hours covered by wildlife control personnel', type: 'textarea', rows: 3 }] },
+        { id: 'ops', short: 'Operations', title: 'Description of the aerodrome operations', letter: 'c', clause: 'Clause 9.1.1.6 c',
+          expects: [['Clause 9.1.1.6 c', 'The WHMP includes a description of the aerodrome operations.'], ['Clause 3.3.10', 'The damage a strike causes depends on the aircraft, so the range of aircraft sizes and types that operate at the aerodrome matters for the risk assessment.']],
+          fields: [
+            { id: 'ops_runways', label: 'Runways and movement areas', type: 'text', req: true },
+            { id: 'ops_movements', label: 'Annual aircraft movements', type: 'text', req: true },
+            { id: 'ops_hours', label: 'Operating hours, including night operations', type: 'text', req: true },
+            { id: 'ops_aircraft', label: 'Aircraft types and sizes that use the aerodrome', type: 'textarea', rows: 3 },
+            { id: 'ops_vicinity', label: 'Surroundings: land use and wildlife features within about 13 km', type: 'textarea', rows: 4, hint: 'For example water, farmland, waste sites and protected areas. Doc 9137 uses a 13 km circle around the aerodrome (Clause 2.4.3, note 1).' },
+            { id: 'ops_constraints', label: 'Operational constraints that affect wildlife control', type: 'textarea', rows: 3 }] },
+        { id: 'data', short: 'Data', title: 'Collecting, reporting and recording wildlife data', letter: 'd', clause: 'Clauses 9.1.1.6 d, 9.1.3',
+          expects: [['Clause 9.1.1.6 d', 'The WHMP states the procedures, the means and the personnel for collecting, reporting and recording data on observed wildlife and wildlife strike events.'], ['Clause 9.1.3.2', 'It refers to the protocols or communication procedure between the stakeholders involved in detection, recording, collecting and reporting.'], ['Clause 9.1.3.3', 'There is a process for rapid communication among those involved in wildlife control, and with ATC and airlines.'], ['Clause 9.1.3.4', 'It states the means and procedures used to collect and identify species from feathers, animal remains and DNA analysis, and the personnel involved.']],
+          fields: [
+            { id: 'data_means', label: 'Procedures, means and personnel for collecting, reporting and recording wildlife data', type: 'textarea', rows: 6, req: true },
+            { id: 'events', label: 'Events that are recorded', type: 'checks', hint: 'Clause 1.3.4 lists four kinds of event that should be recorded.', options: ['A collision with evidence (remains or damage)', 'A collision with no evidence, but indicated by sight or sound', 'Wildlife found dead on the aerodrome without another obvious cause of death', 'Events where wildlife presence affects a flight (for example a missed approach or aborted take-off)'] },
+            { id: 'comm_protocol', label: 'Communication protocols between stakeholders, including rapid communication with ATC and airlines', type: 'textarea', rows: 5, req: true },
+            { id: 'notif', label: 'Operational notifications used (Chapter 8)', type: 'checks', options: ['ATIS', 'NOTAM', 'Pilot reports', 'AIP'] },
+            { id: 'remains_id', label: 'Means and procedures for collecting and identifying species (feathers, remains, DNA analysis) and the personnel involved', type: 'textarea', rows: 4 },
+            { id: 'reports_to', label: 'Strike reporting to the CAA and ICAO: how and by whom', type: 'text' },
+            { id: 'records_sys', label: 'Database or logbooks used', type: 'text' }] },
+        { id: 'risk', short: 'Risk', title: 'Wildlife safety risk assessment', letter: 'e', clause: 'Clauses 9.1.1.6 e, 9.1.4',
+          expects: [['Clause 9.1.1.6 e', 'The WHMP includes a wildlife safety risk assessment method and procedure, including annual reviews.'], ['Clause 9.1.4.2', 'The results and conclusions of the risk assessment are documented in the WHMP, with information on the hazardous species and their presence. This helps to identify the most sensitive areas, since areas with a high presence of wildlife may coincide with flight paths.'], ['Clause 9.1.4.3', 'The aerodrome operator prioritises wildlife management by level of risk, and applies mitigation to the species with the highest risk.']],
+          fields: [
+            { id: 'risk_method', label: 'Risk assessment method and procedure, including annual reviews', type: 'textarea', rows: 7, req: true, starter: 'risk_method' },
+            { id: 'risk_by', label: 'Who carries out the assessment (competent personnel)', type: 'text' },
+            { id: 'risk_import', label: 'Results of the assessment', type: 'risk', req: true, alt: 'risk_manual' },
+            { id: 'risk_manual', label: 'Or describe the results of an assessment made outside this tool', type: 'textarea', rows: 4, hint: 'Use this if you assess risk with your own method. Doc 9137 asks that the results and conclusions are documented in the WHMP (Clause 9.1.4.2).' },
+            { id: 'risk_areas', label: 'Most sensitive areas of the aerodrome and its vicinity', type: 'textarea', rows: 4 }] },
+        { id: 'habitat', short: 'Habitat', title: 'Habitat and land management', letter: 'f', clause: 'Clauses 9.1.1.6 f, 9.1.5.1',
+          expects: [['Clause 9.1.1.6 f', 'The WHMP states the procedures, means and personnel for habitat and land management.'], ['Clause 9.1.5.1', 'Measures for habitat and land use management prevent wildlife from entering the aerodrome and expel or eliminate the wildlife already present.']],
+          fields: [
+            { id: 'habitat_proc', label: 'Procedures, means and personnel for habitat and land management', type: 'textarea', rows: 6, req: true },
+            { id: 'hab_topics', label: 'Topics covered', type: 'checks', options: ['Grass management (Clause 4.3.4: no single grass height suits every aerodrome)', 'Pavement areas (Clause 4.2.3.4)', 'Waste disposal sites (Clause 4.3.6)', 'Land use plan on and off the aerodrome (Clause 9.2.4)', 'List of wildlife attractants on and near the aerodrome (Clause 9.2.4)', 'Aerodrome fence (Clause 9.2.4)', 'Land use survey around the aerodrome, repeated about every five years (Clause 4.4.4)'] },
+            { id: 'habitat_off', label: 'Off-aerodrome land use: how the surroundings are monitored and influenced', type: 'textarea', rows: 4 }] },
+        { id: 'disp', short: 'Dispersal', title: 'Expelling, deterring and removing wildlife', letter: 'g', clause: 'Clauses 9.1.1.6 g, 9.1.5.2',
+          expects: [['Clause 9.1.1.6 g', 'The WHMP states the procedures, means and personnel for expelling, deterring and removing wildlife, including lethal means where appropriate.'], ['Clause 9.1.5.2', 'It includes the resources used for wildlife management tasks (for example vehicles, pyrotechnics and traps) and indicates the personnel in charge.']],
+          fields: [
+            { id: 'disp_proc', label: 'Procedures, means and personnel for expelling, deterring and removing wildlife', type: 'textarea', rows: 7, req: true, starter: 'disp_proc' },
+            { id: 'disp_methods', label: 'Methods in use', type: 'checks', options: ['Patrols and observations (Clause 5.2)', 'Repellents (Clause 5.3)', 'Manually operated distress-call equipment (Clause 5.3.2.10)', 'Detection systems such as avian radar (Clause 6.4)', 'Remotely piloted aircraft (Clause 6.5)', 'Wildlife removal techniques (Clause 7.2.1)', 'Lethal means, where appropriate (Clause 9.1.1.6 g)'] },
+            { id: 'lethal', label: 'Where lethal means are used: legal basis, authorisation, personnel competence and records', type: 'textarea', rows: 3, hint: 'Check national rules on protected species (Clause 7.2.1).' },
+            { id: 'resources', label: 'Resources used for wildlife management tasks', type: 'textarea', rows: 3, hint: 'For example vehicles, pyrotechnics, traps (Clause 9.1.5.2).' }] },
+        { id: 'measures', short: 'Measures', title: 'Mitigation measures register', letter: '', clause: 'Clauses 9.1.5.3 to 9.1.5.6',
+          expects: [['Clause 9.1.5.3', 'All mitigation measures are included in the WHMP so that they can be assessed throughout the year.'], ['Clause 9.1.5.4', 'Each measure should include, at a minimum: the species and risk activity targeted, the type and description of the mitigation, technical details, the implementation period and time frame, the personnel responsible, and the results and effectiveness.'], ['Clause 9.1.5.5', 'Each measure should have an appropriate performance indicator: a specific measurable characteristic that can assess its effectiveness.']],
+          fields: [
+            { id: 'measures', label: 'Measures', type: 'table', req: true, reqCol: 'type', rowLabel: 'Measure', preset: 'measures', hint: 'The two examples come from Clause 9.1.5.6. They are not included in your document until you edit them.',
+              cols: [{ k: 'species', label: 'Species and risk activity targeted', max: 160, list: true }, { k: 'type', label: 'Type and description of the mitigation', type: 'textarea', max: 600 }, { k: 'tech', label: 'Technical details', type: 'textarea', max: 600 }, { k: 'period', label: 'Implementation period and time frame', max: 200 }, { k: 'who', label: 'Personnel responsible', max: 200 }, { k: 'result', label: 'Results and effectiveness', type: 'textarea', max: 600 }, { k: 'kpi', label: 'Performance indicator', type: 'textarea', max: 400 }] }] },
+        { id: 'stake', short: 'Stakeholders', title: 'Coordination with stakeholders', letter: 'h', clause: 'Clauses 9.1.1.6 h, 9.1.6',
+          expects: [['Clause 9.1.6.1', 'The WHMP describes the communication, cooperation and coordination mechanisms with all relevant stakeholders, especially those involved in activities that may encourage wildlife (crop harvesting, water features, pigeon racing, landfills, hunting and so on).'], ['Clause 9.1.6.2', 'Mitigation measures that external stakeholders take near the aerodrome are recorded, monitored and evaluated in the WHMP.']],
+          fields: [
+            { id: 'stake', label: 'Stakeholders', type: 'table', req: true, reqCol: 'mech', rowLabel: 'Stakeholder', preset: 'stake', hint: 'Delete the stakeholders that do not apply to your aerodrome.',
+              cols: [{ k: 'group', label: 'Stakeholder', max: 140 }, { k: 'kind', label: 'Internal or external', type: 'select', options: ['Internal', 'External'] }, { k: 'link', label: 'Activity or link to wildlife', max: 200 }, { k: 'mech', label: 'Coordination mechanism', max: 200 }, { k: 'freq', label: 'Frequency', max: 80 }, { k: 'owner', label: 'Aerodrome owner of the relationship', max: 120 }] },
+            { id: 'stake_comm', label: 'Communication, cooperation and coordination mechanisms', type: 'textarea', rows: 5, req: true },
+            { id: 'stake_ext', label: 'How measures taken by external stakeholders are recorded, monitored and evaluated', type: 'textarea', rows: 4 }] },
+        { id: 'train', short: 'Training', title: 'Training of aerodrome personnel', letter: 'i', clause: 'Clauses 9.1.1.6 i, 9.1.7',
+          expects: [['Clause 9.1.7', 'The WHMP includes training information for wildlife control personnel and for those responsible for developing and implementing the WHMP, and procedures for initial and recurrent training.'], ['Clause 7.1.3', 'Personnel complete a training programme and are tested, and the results are recorded and kept on file.'], ['Clause 7.1.4', 'Recurrent training is recommended at least every two years.']],
+          fields: [
+            { id: 'train_proc', label: 'Procedures, means and provisions for training', type: 'textarea', rows: 6, req: true, starter: 'train_proc' },
+            { id: 'train', label: 'Training plan by group', type: 'table', req: true, reqCol: 'initial', rowLabel: 'Group', preset: 'train',
+              cols: [{ k: 'group', label: 'Group', type: 'select', options: ['Wildlife control personnel', 'Personnel responsible for WHMP development and implementation', 'Other personnel'] }, { k: 'initial', label: 'Initial training', max: 240 }, { k: 'recurrent', label: 'Recurrent training', max: 160 }, { k: 'records', label: 'Competency check and records', max: 240 }] },
+            { id: 'train_topics', label: 'Topics covered', type: 'checks', options: WB_TOPICS, hint: 'The topics listed in Clause 7.2.1.' }] },
+        { id: 'perf', short: 'Indicators', title: 'Performance indicators and evaluation', letter: 'j', clause: 'Clauses 9.1.1.6 j, 9.1.8, 9.2',
+          expects: [['Clause 9.1.1.6 j', 'The WHMP includes procedures and performance indicators to monitor the mitigation measures applied and to assess their effectiveness, and the effectiveness of the WHMP itself, in terms of the increase or decrease of the wildlife strike risk level.'], ['Clause 9.2.11', 'Leading indicators include the presence of wildlife, the completeness of strike reports and management logs, species identification in strikes, training, completion of actions and the frequency of wildlife committee meetings.'], ['Clause 9.2.1', 'The aerodrome operator evaluates the effectiveness of the WHMP annually, at minimum.']],
+          fields: [
+            { id: 'lagging', label: 'Lagging indicators', type: 'checks', options: WB_LAGGING, hint: 'Clause 9.2.10 gives these as examples of outcome-based indicators.' },
+            { id: 'leading', label: 'Leading indicators', type: 'checks', req: true, options: WB_LEADING },
+            { id: 'kpi_custom', label: 'Other indicators', type: 'textarea', rows: 3 },
+            { id: 'eval_proc', label: 'Procedure for the self-evaluation and the annual evaluation', type: 'textarea', rows: 6, req: true, starter: 'eval_proc' },
+            { id: 'selfeval', label: 'Aspects covered by the self-evaluation (Clause 9.1.8)', type: 'checks', options: WB_SELFEVAL },
+            { id: 'eval_freq', label: 'Evaluation frequency', type: 'select', options: ['Annually (the minimum in Clause 9.2.1)', 'Every six months', 'Quarterly'] },
+            { id: 'eval_owner', label: 'Person or post responsible for the evaluation', type: 'text' }] },
+        { id: 'review', short: 'Review', title: 'Review and output', letter: '', clause: 'Clause 9.1.1.6', final: true, expects: [], fields: [] }
+    ];
+    const WB_PRESETS = {
+        roles: [
+            { role: 'Wildlife manager or coordinator', holder: '', tasks: 'Responsible and accountable for wildlife hazard management and for the personnel engaged in wildlife hazard control (Clause 2.2.2). Coordinates all tasks related to wildlife hazard management associated with the WHMP (Clause 9.1.2.2).', cover: WB_COVER[0] },
+            { role: 'Wildlife controller', holder: '', tasks: 'Front-line role (Clause 2.2.3): maintains surveillance of wildlife on and near the aerodrome; implements active wildlife control measures; provides details of potential wildlife hazards to ATS units; records all wildlife observed, the control activity and its effect, and actual, potential or suspected strikes; advises senior personnel on improvements; assists with surveys.', cover: WB_COVER[0] },
+            { role: 'Air traffic control', holder: '', tasks: 'Reports all aerodrome wildlife incidents through the established procedures, keeps continuous liaison with wildlife control personnel, and attends local aerodrome and national wildlife committees (Clause 2.3.2).', cover: WB_COVER[0] },
+            { role: 'Airside personnel', holder: '', tasks: 'Report wildlife incidents, wildlife remains and other identified hazards to the aerodrome operator, and know about hazardous wildlife attractants (Clause 2.3.1).', cover: WB_COVER[0] },
+            { role: 'Pilots and aircraft operators', holder: '', tasks: 'Report wildlife strikes and wildlife activity through the established procedures (Clause 2.3.3).', cover: WB_COVER[0] }],
+        measures: [
+            { ex: true, species: 'Buzzards: population increased despite habitat management (Doc 9137 Clause 9.1.5.6, example 1)', type: 'Rodenticide introduced to reduce the small rodents that are the main food source for the buzzards.', tech: '', period: '', who: '', result: '', kpi: 'Number of buzzards on the aerodrome; number of rodents on the aerodrome; mass of rodenticide used; number of buzzard strikes.' },
+            { ex: true, species: 'Swifts and pigeons nesting and sheltering in the terminal building (Doc 9137 Clause 9.1.5.6, example 2)', type: 'Netting installed in the cracks and cavities to prevent access.', tech: '', period: '', who: '', result: '', kpi: 'Number of cracks or cavities detected and covered; number of nests in the cavities; number of birds in the cavities; amount of faeces found in the cavities.' }],
+        stake: [
+            { group: 'Air traffic control', kind: 'Internal', link: 'Reports wildlife observations and strikes; liaison with wildlife control (Clause 2.3.2)', mech: '', freq: '', owner: '' },
+            { group: 'Airside personnel', kind: 'Internal', link: 'Report incidents and remains (Clause 2.3.1)', mech: '', freq: '', owner: '' },
+            { group: 'Pilots and aircraft operators', kind: 'External', link: 'Report strikes and wildlife activity (Clause 2.3.3)', mech: '', freq: '', owner: '' },
+            { group: 'Landowners around the aerodrome', kind: 'External', link: 'Land use that may attract wildlife (Clause 2.4.2)', mech: '', freq: '', owner: '' },
+            { group: 'State and local authorities responsible for land use planning', kind: 'External', link: 'Territorial planning and safeguarding of the area around the aerodrome (Clause 2.4.3)', mech: '', freq: '', owner: '' },
+            { group: 'Local wildlife committee', kind: 'External', link: 'Periodic coordination (Clause 9.1.8 g)', mech: '', freq: '', owner: '' },
+            { group: 'Farmers and crop harvesting', kind: 'External', link: 'Crop harvesting (Clause 9.1.6.1)', mech: '', freq: '', owner: '' },
+            { group: 'Operators of water features', kind: 'External', link: 'Water features (Clause 9.1.6.1)', mech: '', freq: '', owner: '' },
+            { group: 'Pigeon racing clubs', kind: 'External', link: 'Pigeon racing (Clause 9.1.6.1)', mech: '', freq: '', owner: '' },
+            { group: 'Landfill operators', kind: 'External', link: 'Landfills (Clause 9.1.6.1)', mech: '', freq: '', owner: '' },
+            { group: 'Hunting associations', kind: 'External', link: 'Hunting (Clause 9.1.6.1)', mech: '', freq: '', owner: '' }],
+        train: [
+            { group: 'Wildlife control personnel', initial: '', recurrent: 'At least every two years (Clause 7.1.4)', records: 'Tested; results recorded and kept on file (Clause 7.1.3)' },
+            { group: 'Personnel responsible for WHMP development and implementation', initial: '', recurrent: 'At least every two years (Clause 7.1.4)', records: 'Tested; results recorded and kept on file (Clause 7.1.3)' }]
+    };
+
+    // ── state, saving and progress ─────────────────────────────────────────────────
+    const wbEsc = function (v) { return rcEsc(v == null ? '' : v); };
+    function wbDefaults() {
+        if (!WB.d.version) WB.d.version = '1.0';
+        if (!WB.d.eval_freq) WB.d.eval_freq = WB_STEPS.find(function (s) { return s.id === 'perf'; }).fields.find(function (f) { return f.id === 'eval_freq'; }).options[0];
+    }
+    function wbLoad() {
+        try { const o = JSON.parse(sbsStorage.getItem(WB_KEY) || 'null'); if (o && typeof o === 'object' && o.d && typeof o.d === 'object') { WB.d = o.d; WB.step = Math.min(Math.max(parseInt(o.step, 10) || 0, 0), WB_STEPS.length - 1); } } catch (e) {}
+        wbDefaults();
+    }
+    function wbMeta() { try { const m = JSON.parse(sbsStorage.getItem(WB_META_KEY) || '{}'); return (m && typeof m === 'object') ? m : {}; } catch (e) { return {}; } }
+    function wbMetaTouch(kind) {
+        const m = wbMeta(), now = new Date().toISOString();
+        if (kind === 'save') { m.lastSavedAt = now; m.dirty = true; } else if (kind === 'backup') { m.lastBackupAt = now; m.dirty = false; } else if (kind === 'import') { m.lastSavedAt = now; m.lastBackupAt = now; m.dirty = false; }
+        try { sbsStorage.setItem(WB_META_KEY, JSON.stringify(m)); } catch (e) {}
+    }
+    function wbSaveNow() {
+        clearTimeout(WB.timer); WB.timer = 0;
+        try { sbsStorage.setItem(WB_KEY, JSON.stringify({ d: WB.d, step: WB.step, v: 1 })); } catch (e) {}
+        wbMetaTouch('save'); wbRenderStatus();
+    }
+    function wbTouch() { clearTimeout(WB.timer); WB.timer = setTimeout(wbSaveNow, 350); wbRenderSteps(); }
+    function wbFilled(f) {
+        const v = WB.d[f.id];
+        if (f.type === 'table') return Array.isArray(v) && v.some(function (r) { return !r.ex && (f.reqCol ? String(r[f.reqCol] || '').trim() : Object.keys(r).some(function (k) { return k !== 'ex' && String(r[k] || '').trim(); })); });   // a table counts once its key column is filled in
+        if (f.type === 'checks') return Array.isArray(v) && v.length > 0;
+        if (f.type === 'risk') return !!(v && Array.isArray(v.items) && v.items.length);
+        return String(v == null ? '' : v).trim().length > 0;
+    }
+    function wbStepDone(s) {
+        if (s.final) return false;
+        return s.fields.filter(function (f) { return f.req; }).every(function (f) { return wbFilled(f) || (f.alt && wbFilled(s.fields.find(function (x) { return x.id === f.alt; }))); });
+    }
+    function wbDoneCount() { return WB_STEPS.filter(wbStepDone).length; }
+    function wbTotal() { return WB_STEPS.filter(function (s) { return !s.final; }).length; }
+
+    // ── rendering ──────────────────────────────────────────────────────────────────
+    function wbRenderStatus() {
+        const host = document.getElementById('wbStatus'); if (!host) return;
+        const m = wbMeta(), ok = window.__sbsStore.persistent;
+        let h = '';
+        if (!ok) h += '<div class="rc-warn"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>This browser is not letting the page save your draft.</strong> It will be lost when you close or refresh this page. Export a JSON backup before you leave. <button type="button" class="rc-link" onclick="openStoreInfo()">Why does this happen?</button></div></div>';
+        else h += '<div class="rc-saveline"><i class="fa-solid fa-floppy-disk"></i><span>Saved automatically in this browser, on this device' + (m.lastSavedAt ? ' &middot; last saved ' + rcEsc(rcWhen(m.lastSavedAt)) : '') + '</span><button type="button" class="rc-link" onclick="openStoreInfo()">Where is my data?</button></div>';
+        if (m.lastSavedAt || wbDoneCount()) {
+            const due = !!m.dirty || !m.lastBackupAt;
+            h += '<div class="rc-backline' + (due ? ' is-due' : '') + '"><i class="fa-solid fa-shield-halved"></i><span>' + (m.lastBackupAt ? 'Last backup file: ' + rcEsc(rcWhen(m.lastBackupAt)) : 'No backup file yet') + (m.dirty && m.lastBackupAt ? ' &middot; changes since then are not backed up' : '') + '</span>' + (due ? '<button type="button" class="rc-link" onclick="wbExportJson()">Back up now</button>' : '') + '</div>';
         }
+        host.innerHTML = h;
+    }
+    function wbRenderSteps() {
+        const nav = document.getElementById('wbSteps'); if (!nav) return;
+        const total = wbTotal(), done = wbDoneCount(), bar = document.getElementById('wbBar'), txt = document.getElementById('wbProgTxt');
+        if (bar) bar.style.width = Math.round(done / total * 100) + '%';
+        if (txt) txt.textContent = done + ' of ' + total + ' sections complete';
+        nav.innerHTML = WB_STEPS.map(function (s, i) {
+            return '<button type="button" class="wb-chip' + (i === WB.step ? ' cur' : '') + (wbStepDone(s) ? ' done' : '') + '" onclick="wbGo(' + i + ')" aria-current="' + (i === WB.step ? 'step' : 'false') + '" title="' + wbEsc(s.title) + '"><b>' + (wbStepDone(s) ? '&#10003;' : (i + 1)) + '</b><span>' + wbEsc(s.short) + '</span></button>';
+        }).join('');
+    }
+    function wbRiskHtml(f) {
+        const v = WB.d[f.id], items = v && Array.isArray(v.items) ? v.items : [];
+        const act = '<div class="wb-bar"><button type="button" class="rc-btn rc-btn-primary" onclick="wbImportRisk()"><i class="fa-solid fa-arrows-rotate"></i> ' + (items.length ? 'Refresh from the risk register' : 'Import from the risk register') + '</button><button type="button" class="rc-btn rc-btn-ghost" onclick="openCalculator()"><i class="fa-solid fa-calculator"></i> Open the risk calculator</button></div>';
+        if (!items.length) return '<p class="wb-hint">No results imported yet. The risk register in the calculator is copied here as a dated snapshot, and is included in your WHMP.</p>' + act;
+        const cls = { 1: 'rc-green', 2: 'rc-yellow', 3: 'rc-red' };
+        return '<p class="wb-hint">Snapshot taken ' + wbEsc(rcWhen(v.at)) + '. Press Refresh after you change the register.</p><div class="overflow-x-auto"><table class="icao-table"><thead><tr><th>#</th><th>Species</th><th>Probability</th><th>Severity</th><th>Score</th><th>Risk level</th></tr></thead><tbody>' +
+            items.map(function (it, i) { return '<tr><td>' + (i + 1) + '</td><td><strong>' + wbEsc(it.name) + '</strong></td><td>' + wbEsc(it.prob) + '</td><td>' + wbEsc(it.sev) + '</td><td>' + wbEsc(it.score) + '</td><td><span class="rc-badge ' + (cls[it.level] || '') + '"><span class="rc-dotc"></span>' + wbEsc(it.colour) + '</span></td></tr>'; }).join('') + '</tbody></table></div>' + act;
+    }
+    function wbCellHtml(f, ri, c, r) {
+        const id = 'wbt_' + f.id + '_' + ri + '_' + c.k, a = 'data-wbt="' + f.id + '" data-r="' + ri + '" data-c="' + c.k + '"', v = r[c.k] == null ? '' : r[c.k];
+        let ctl;
+        if (c.type === 'select') ctl = '<select class="wb-in" id="' + id + '" ' + a + '>' + c.options.map(function (o) { return '<option' + (o === v ? ' selected' : '') + '>' + wbEsc(o) + '</option>'; }).join('') + '</select>';
+        else if (c.type === 'textarea') ctl = '<textarea class="wb-in" id="' + id + '" ' + a + ' rows="3" maxlength="' + (c.max || 600) + '">' + wbEsc(v) + '</textarea>';
+        else ctl = '<input class="wb-in" id="' + id + '" ' + a + ' type="text" maxlength="' + (c.max || 160) + '" value="' + wbEsc(v) + '"' + (c.list ? ' list="wbSpecies"' : '') + '>';
+        return '<div class="wb-cell' + (c.type === 'textarea' ? ' wide' : '') + '"><label class="wb-lab" for="' + id + '">' + wbEsc(c.label) + '</label>' + ctl + '</div>';
+    }
+    function wbTableHtml(f) {
+        const rows = Array.isArray(WB.d[f.id]) ? WB.d[f.id] : [];
+        let h = f.hint ? '<p class="wb-hint">' + f.hint + '</p>' : '';
+        if (f.preset) h += '<div class="wb-bar"><button type="button" class="rc-btn rc-btn-ghost" onclick="wbPreset(\'' + f.id + '\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Add typical rows from Doc 9137</button></div>';
+        rows.forEach(function (r, ri) {
+            h += '<div class="wb-row' + (r.ex ? ' is-ex' : '') + '"><div class="wb-row-h"><b>' + wbEsc(f.rowLabel) + ' ' + (ri + 1) + '</b>' + (r.ex ? '<span class="wb-ex">Doc 9137 example</span>' : '') + '<button type="button" class="wb-del" onclick="wbDelRow(\'' + f.id + '\',' + ri + ')" aria-label="Remove ' + wbEsc(f.rowLabel) + ' ' + (ri + 1) + '"><i class="fa-solid fa-trash"></i></button></div><div class="wb-row-g">' + f.cols.map(function (c) { return wbCellHtml(f, ri, c, r); }).join('') + '</div></div>';
+        });
+        return h + '<button type="button" class="rc-btn rc-btn-ghost" onclick="wbAddRow(\'' + f.id + '\')"><i class="fa-solid fa-plus"></i> Add ' + wbEsc(f.rowLabel.toLowerCase()) + '</button>';
+    }
+    function wbFieldHtml(f) {
+        const v = WB.d[f.id], id = 'wb_' + f.id;
+        const lab = '<label class="wb-lab" for="' + id + '">' + wbEsc(f.label) + (f.req ? ' <span class="text-rose-400">*</span>' : '') + '</label>';
+        const hint = f.hint && f.type !== 'table' ? '<p class="wb-hint">' + f.hint + '</p>' : '';
+        let ctl = '';
+        if (f.type === 'text' || f.type === 'date') ctl = '<input class="wb-in" id="' + id + '" data-wb="' + f.id + '" type="' + f.type + '" maxlength="' + (f.max || 200) + '" value="' + wbEsc(v) + '"' + (f.ph ? ' placeholder="' + wbEsc(f.ph) + '"' : '') + '>';
+        else if (f.type === 'textarea') ctl = '<textarea class="wb-in" id="' + id + '" data-wb="' + f.id + '" rows="' + (f.rows || 4) + '" maxlength="4000">' + wbEsc(v) + '</textarea>' + (f.starter ? '<div class="wb-bar"><button type="button" class="rc-btn rc-btn-ghost" onclick="wbStarter(\'' + f.id + '\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Insert starter text based on Doc 9137</button></div>' : '');
+        else if (f.type === 'select') ctl = '<select class="wb-in" id="' + id + '" data-wb="' + f.id + '">' + f.options.map(function (o) { return '<option' + (o === v ? ' selected' : '') + '>' + wbEsc(o) + '</option>'; }).join('') + '</select>';
+        else if (f.type === 'checks') { const sel = Array.isArray(v) ? v : []; ctl = '<div class="wb-checks">' + f.options.map(function (o, i) { return '<label class="wb-chk"><input type="checkbox" data-wbc="' + f.id + '" value="' + i + '"' + (sel.indexOf(o) >= 0 ? ' checked' : '') + '><span>' + wbEsc(o) + '</span></label>'; }).join('') + '</div>'; }
+        else if (f.type === 'table') return '<fieldset class="wb-field"><legend class="wb-lab">' + wbEsc(f.label) + (f.req ? ' <span class="text-rose-400">*</span>' : '') + '</legend>' + wbTableHtml(f) + '</fieldset>';
+        else if (f.type === 'risk') return '<fieldset class="wb-field"><legend class="wb-lab">' + wbEsc(f.label) + (f.req ? ' <span class="text-rose-400">*</span>' : '') + '</legend>' + wbRiskHtml(f) + '</fieldset>';
+        return '<div class="wb-field">' + lab + hint + ctl + '</div>';
+    }
+    function wbGaps() {
+        const g = [], d = WB.d, ms = (Array.isArray(d.measures) ? d.measures : []).filter(function (r) { return !r.ex; });
+        const tc = Array.isArray(d.tasks_covered) ? d.tasks_covered : [], un = WB_TASKS.filter(function (t) { return tc.indexOf(t) < 0; });
+        if (un.length && un.length < WB_TASKS.length) g.push({ s: 'roles', t: un.length + ' of the 11 tasks in Clause 9.1.2.1 are not ticked as covered by a role: ' + un.join('; ') + '.' });
+        const roles = Array.isArray(d.roles) ? d.roles : [];
+        if (roles.some(function (r) { return r.cover && r.cover !== WB_COVER[0]; }) && !String(d.cover_absent || '').trim()) g.push({ s: 'roles', t: 'Some roles do not cover all operating hours, but nobody is named for the remaining hours (Clause 9.1.2.3).' });
+        const snap = d.risk_import && Array.isArray(d.risk_import.items) ? d.risk_import.items : [];
+        snap.filter(function (i) { return i.level === 3; }).forEach(function (i) { if (!ms.some(function (r) { return String(r.species || '').toLowerCase().indexOf(String(i.name).toLowerCase()) >= 0; })) g.push({ s: 'measures', t: i.name + ' is at Level 3 (Intolerable) and no mitigation measure names it (Clause 9.1.4.3).' }); });
+        ms.forEach(function (r, i) { if (!String(r.kpi || '').trim()) g.push({ s: 'measures', t: 'Measure ' + (i + 1) + ' has no performance indicator (Clause 9.1.5.5).' }); });
+        if (d.issue_date && d.review_date) { const days = (Date.parse(d.review_date) - Date.parse(d.issue_date)) / 86400000; if (days > 366) g.push({ s: 'doc', t: 'The next review is more than a year after the date of issue. Doc 9137 asks for a review at a minimum annually (Clause 9.1.1.5).' }); }
+        else g.push({ s: 'doc', t: 'Set the date of issue and the next review date (Clause 9.1.1.5).' });
+        let ph = 0; WB_STEPS.forEach(function (s) { s.fields.forEach(function (f) { if (f.type === 'textarea' || f.type === 'text') { if (/\[[^\]]+\]/.test(String(d[f.id] || ''))) ph++; } }); });
+        if (ph) g.push({ s: '', t: ph + ' field' + (ph === 1 ? ' still contains' : 's still contain') + ' a [bracketed placeholder] from the starter text. Replace it with your own details.' });
+        return g;
+    }
+    function wbReviewHtml() {
+        const letters = WB_STEPS.filter(function (s) { return s.letter; });
+        let h = '<div class="mg-doc"><p class="mg-tag">Minimum contents of a WHMP (Clause 9.1.1.6)</p><div class="wb-min">' + letters.map(function (s) { const ok = wbStepDone(s), i = WB_STEPS.indexOf(s); return '<button type="button" class="wb-minrow' + (ok ? ' ok' : '') + '" onclick="wbGo(' + i + ')"><b>' + s.letter + '</b><span>' + wbEsc(s.title) + '</span><i>' + (ok ? 'Complete' : 'To do') + '</i></button>'; }).join('') + '</div></div>';
+        const gaps = wbGaps();
+        h += '<div class="mg-choice"><p class="mg-tag">Checks before you issue the document</p>' + (gaps.length ? '<ul>' + gaps.map(function (x) { return '<li>' + wbEsc(x.t) + (x.s ? ' <button type="button" class="rc-link" onclick="wbGo(' + WB_STEPS.findIndex(function (s) { return s.id === x.s; }) + ')">Go to the step</button>' : '') + '</li>'; }).join('') + '</ul>' : '<p>No gaps found by these checks.</p>') + '</div>';
+        h += '<div class="wb-bar"><button type="button" class="rc-btn rc-btn-primary" onclick="wbPreview()"><i class="fa-solid fa-file-pdf"></i> Preview and save as PDF</button><button type="button" class="rc-btn rc-btn-ghost" onclick="wbDownloadDoc()"><i class="fa-solid fa-file-word"></i> Download for Word</button><button type="button" class="rc-btn rc-btn-ghost" onclick="wbExportJson()"><i class="fa-solid fa-file-export"></i> Export JSON</button></div>';
+        h += '<div class="warning-callout"><p class="text-xs text-rose-300"><strong>Draft only.</strong> The builder organises your information according to the minimum contents in Doc 9137. It does not make the document compliant by itself. Adapt it to your aerodrome, check it against the rules of your State and have it approved by the aerodrome operator.</p></div>';
+        return h;
+    }
+    function wbRenderStep() {
+        const host = document.getElementById('wbStep'); if (!host) return;
+        const s = WB_STEPS[WB.step], i = WB.step, snap = WB.d.risk_import && Array.isArray(WB.d.risk_import.items) ? WB.d.risk_import.items : [];
+        let h = '<datalist id="wbSpecies">' + snap.map(function (x) { return '<option value="' + wbEsc(x.name) + '">'; }).join('') + '</datalist>';
+        h += '<div class="wb-head"><span class="wb-num">' + (s.final ? '&#9873;' : (i + 1)) + '</span><div class="min-w-0"><h3 class="wb-title">' + wbEsc(s.title) + '</h3><p class="wb-clause">' + wbEsc(s.clause) + (wbStepDone(s) ? ' &middot; <span class="text-emerald-400 font-bold">complete</span>' : '') + '</p></div></div>';
+        if (s.expects && s.expects.length) h += '<details class="wb-expect" open><summary>What Doc 9137 expects</summary><ul>' + s.expects.map(function (e) { return '<li><span class="mg-ref">' + wbEsc(e[0]) + '</span> ' + wbEsc(e[1]) + '</li>'; }).join('') + '</ul></details>';
+        h += s.final ? wbReviewHtml() : s.fields.map(wbFieldHtml).join('');
+        host.innerHTML = h;
+        const nav = document.getElementById('wbNav');
+        if (nav) nav.innerHTML = '<button type="button" class="rc-btn rc-btn-ghost" onclick="wbGo(' + (i - 1) + ')"' + (i === 0 ? ' disabled' : '') + '><i class="fa-solid fa-arrow-left"></i> Back</button><span class="text-[11px] text-slate-500 font-bold">Step ' + (i + 1) + ' of ' + WB_STEPS.length + '</span><button type="button" class="rc-btn rc-btn-primary" onclick="wbGo(' + (i + 1) + ')"' + (i === WB_STEPS.length - 1 ? ' disabled' : '') + '>Next <i class="fa-solid fa-arrow-right"></i></button>';
+        wbRenderSteps(); wbRenderStatus();
+    }
+    function wbRender() { wbBind(); wbRenderStep(); }
+    var _wbFirstNav = false;
+    function wbGo(i) {
+        i = Math.min(Math.max(parseInt(i, 10) || 0, 0), WB_STEPS.length - 1);
+        if (WB.timer) wbSaveNow();
+        WB.step = i; try { sbsStorage.setItem(WB_KEY, JSON.stringify({ d: WB.d, step: WB.step, v: 1 })); } catch (e) {}
+        wbRenderStep();
+        const t = document.getElementById('wbSteps'); if (t) { try { scrollToContent(); } catch (e) {} }
+        if (!_wbFirstNav && wbDoneCount() + (Object.keys(WB.d).length > 2 ? 1 : 0) > 0) { _wbFirstNav = true; if (typeof rcAfterSaveNotice === 'function') rcAfterSaveNotice(); }
+    }
+    function wbBind() {
+        const root = document.getElementById('wbStep'); if (!root || root.getAttribute('data-bound')) return; root.setAttribute('data-bound', '1');
+        const onValue = function (t) {
+            if (t.getAttribute('data-wb')) { WB.d[t.getAttribute('data-wb')] = t.value; wbTouch(); }
+            else if (t.getAttribute('data-wbt')) {
+                const rows = WB.d[t.getAttribute('data-wbt')] || [], row = rows[parseInt(t.getAttribute('data-r'), 10)];
+                if (row) { row[t.getAttribute('data-c')] = t.value; if (row.ex) { row.ex = false; const rw = t.closest('.wb-row'); if (rw) { rw.classList.remove('is-ex'); const b = rw.querySelector('.wb-ex'); if (b) b.remove(); } } wbTouch(); }
+            }
+        };
+        root.addEventListener('input', function (e) { onValue(e.target); });
+        root.addEventListener('change', function (e) {
+            const t = e.target;
+            if (t.getAttribute && t.getAttribute('data-wbc')) {
+                const f = WB_STEPS.reduce(function (a, s) { return a || s.fields.find(function (x) { return x.id === t.getAttribute('data-wbc'); }); }, null), opt = f.options[parseInt(t.value, 10)], cur = Array.isArray(WB.d[f.id]) ? WB.d[f.id].slice() : [], k = cur.indexOf(opt);
+                if (t.checked && k < 0) cur.push(opt); else if (!t.checked && k >= 0) cur.splice(k, 1);
+                WB.d[f.id] = f.options.filter(function (o) { return cur.indexOf(o) >= 0; }); wbTouch();
+            } else if (t.tagName === 'SELECT') onValue(t);
+        });
+    }
+    function wbFieldById(id) { return WB_STEPS.reduce(function (a, s) { return a || s.fields.find(function (x) { return x.id === id; }); }, null); }
+    function wbBlankRow(f) { const r = {}; f.cols.forEach(function (c) { r[c.k] = c.type === 'select' ? c.options[0] : ''; }); return r; }
+    function wbAddRow(id) { const f = wbFieldById(id); if (!Array.isArray(WB.d[id])) WB.d[id] = []; if (WB.d[id].length >= 40) { showToast('A table holds up to 40 rows.', 'warning'); return; } WB.d[id].push(wbBlankRow(f)); wbSaveNow(); wbRenderStep(); const last = document.querySelector('#wbStep [data-wbt="' + id + '"][data-r="' + (WB.d[id].length - 1) + '"]'); if (last) last.focus(); }
+    function wbDelRow(id, r) { if (Array.isArray(WB.d[id])) { WB.d[id].splice(r, 1); wbSaveNow(); wbRenderStep(); } }
+    function wbPreset(id) {
+        const f = wbFieldById(id), src = WB_PRESETS[f.preset]; if (!Array.isArray(WB.d[id])) WB.d[id] = [];
+        const have = WB.d[id].map(function (r) { return String(r[f.cols[0].k] || '').toLowerCase(); }); let n = 0;
+        src.forEach(function (r) { if (WB.d[id].length < 40 && have.indexOf(String(r[f.cols[0].k] || '').toLowerCase()) < 0) { WB.d[id].push(Object.assign({}, r)); n++; } });
+        wbSaveNow(); wbRenderStep(); showToast(n ? 'Added ' + n + ' row' + (n === 1 ? '' : 's') + ' from Doc 9137. Edit them to match your aerodrome.' : 'Those rows are already in the table.', n ? 'success' : 'info');
+    }
+    function wbStarter(id) {
+        const f = wbFieldById(id), t = WB_STARTER[f.starter]; if (!t) return; const cur = String(WB.d[id] || '').trim();
+        WB.d[id] = cur ? cur + '\n\n' + t : t; wbSaveNow(); wbRenderStep(); showToast('Starter text inserted. Replace the [bracketed] parts with your own details.', 'info');
+    }
+    function wbImportRisk() {
+        const ranked = rcSortedRegister();
+        if (!ranked.length) { showToast('Your risk register is empty. Add species in the Risk Calculator first.', 'warning'); return false; }
+        WB.d.risk_import = { at: new Date().toISOString(), items: ranked.map(function (it) {
+            const m = RC_MASS.find(function (x) { return x.id === it.e.mass; }), fl = RC_FLOCK.find(function (x) { return x.id === it.e.flock; });
+            return { name: it.e.name, mass: m ? m.label : '', flock: fl ? fl.label : '', prob: RC_LEVELS[it.c.prob], sev: RC_LEVELS[it.c.sev], score: it.c.score, level: it.c.level, colour: RC_META[it.c.level].colour, reason: it.e.reason || '' };
+        }) };
+        wbSaveNow(); wbRenderStep(); showToast('Imported ' + ranked.length + ' species from the risk register.', 'success'); return true;
+    }
+    function openWhmp(stepId) {
+        hideAllViews();
+        STATE.currentViewContext = { type: 'whmp' };
+        const v = document.getElementById('view-whmp'); v.classList.remove('hidden'); v.classList.add('view-panel'); setTimeout(function () { v.classList.remove('view-panel'); }, 400);
+        document.querySelectorAll('#chapterNavList button').forEach(function (b) { b.classList.remove('nav-item-active'); });
+        const tb = document.getElementById('navWhmpBtn'); if (tb) tb.classList.add('nav-item-active');
+        ['progress', 'chapter', 'tools', 'about', 'consult'].forEach(function (t) { const b = document.getElementById('mobBtn' + t.charAt(0).toUpperCase() + t.slice(1)); if (b) b.classList.toggle('active', t === 'tools'); });
+        if (typeof stepId === 'string') { const k = WB_STEPS.findIndex(function (s) { return s.id === stepId; }); if (k >= 0) WB.step = k; }
+        wbRender(); scrollToContent();
+    }
+    function wbOpenWithRisk() { if (!RC.reg.length) { showToast('Add at least one species to the register first.', 'warning'); return; } openWhmp('risk'); wbImportRisk(); }
+    async function wbResetDraft() {
+        const ok = await appConfirm('Erase the whole WHMP draft from this browser? If you have not exported a backup, it cannot be recovered.', { title: 'Erase the WHMP draft?', ok: 'Erase draft', danger: true });
+        if (!ok) return; WB.d = {}; WB.step = 0; wbDefaults(); try { sbsStorage.removeItem(WB_KEY); sbsStorage.removeItem(WB_META_KEY); } catch (e) {} wbRender();
+    }
+    function wbResetAll() { WB.d = {}; WB.step = 0; _wbFirstNav = false; try { sbsStorage.removeItem(WB_KEY); sbsStorage.removeItem(WB_META_KEY); } catch (e) {} wbDefaults(); wbRender(); }
+
+    // ── export, import, document ───────────────────────────────────────────────────
+    let RPT_BUILDER = null;
+    function wbCleanStr(v, max, keepBreaks) { const s = String(v == null ? '' : v).replace(keepBreaks ? /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g : /[\u0000-\u001f\u007f]/g, ' '); return (keepBreaks ? s : s.replace(/\s+/g, ' ')).trim().slice(0, max); }
+    function wbSanitize(src) {
+        const out = {}; if (!src || typeof src !== 'object') return out;
+        WB_STEPS.forEach(function (s) {
+            s.fields.forEach(function (f) {
+                const v = src[f.id];
+                if (f.type === 'text') out[f.id] = wbCleanStr(v, f.max || 200);
+                else if (f.type === 'textarea') out[f.id] = wbCleanStr(v, 4000, true);
+                else if (f.type === 'date') out[f.id] = /^\d{4}-\d{2}-\d{2}$/.test(String(v || '')) && !isNaN(Date.parse(v)) ? String(v) : '';
+                else if (f.type === 'select') out[f.id] = f.options.indexOf(v) >= 0 ? v : f.options[0];
+                else if (f.type === 'checks') out[f.id] = Array.isArray(v) ? f.options.filter(function (o) { return v.indexOf(o) >= 0; }) : [];
+                else if (f.type === 'table') out[f.id] = Array.isArray(v) ? v.slice(0, 40).map(function (r) { const row = {}; f.cols.forEach(function (c) { const x = r && r[c.k]; row[c.k] = c.type === 'select' ? (c.options.indexOf(x) >= 0 ? x : c.options[0]) : wbCleanStr(x, c.max || 600, c.type === 'textarea'); }); if (r && r.ex === true) row.ex = true; return row; }) : [];
+                else if (f.type === 'risk') {
+                    const items = v && Array.isArray(v.items) ? v.items.slice(0, 40).map(function (it) { const lv = parseInt(it && it.level, 10), sc = parseInt(it && it.score, 10); return { name: wbCleanStr(it && it.name, 60), mass: wbCleanStr(it && it.mass, 60), flock: wbCleanStr(it && it.flock, 60), prob: wbCleanStr(it && it.prob, 20), sev: wbCleanStr(it && it.sev, 20), score: sc >= 1 && sc <= 25 ? sc : 1, level: lv >= 1 && lv <= 3 ? lv : 1, colour: ['Green', 'Yellow', 'Red'][(lv >= 1 && lv <= 3 ? lv : 1) - 1], reason: wbCleanStr(it && it.reason, 140) }; }).filter(function (it) { return it.name; }) : [];
+                    out[f.id] = { at: v && !isNaN(Date.parse(v.at)) ? new Date(Date.parse(v.at)).toISOString() : '', items: items };
+                }
+            });
+        });
+        return out;
+    }
+    function wbExportObject() {
+        return { format: 'StopBIRDSTRIKE-whmp-draft', version: 1, exportedAt: new Date().toISOString(), source: 'ICAO Doc 9137 Part 3 (5th edition, 2020), Chapter 9, WHMP builder', tool: 'StopBIRDSTRIKE Orientation Platform, WHMP builder', note: 'A draft prepared with the WHMP builder. It must be reviewed, adapted and approved by the aerodrome operator.', progress: { complete: wbDoneCount(), of: wbTotal() }, data: WB.d };
+    }
+    function wbExportJson() {
+        if (WB.timer) wbSaveNow();
+        try { rcDownload(JSON.stringify(wbExportObject(), null, 2), 'application/json', 'StopBIRDSTRIKE_WHMP_draft_' + rcDateStamp() + '.json'); wbMetaTouch('backup'); wbRenderStatus(); showToast('Backup file downloaded. Keep it somewhere safe. You can import it later, on any device.', 'success'); }
+        catch (err) { showToast('Download is not available here. Open the platform in its own browser tab and try again.', 'warning'); }
+    }
+    function wbImportClick() { const f = document.getElementById('wbImportFile'); if (f) { f.value = ''; f.click(); } }
+    function wbImportChosen(input) {
+        const file = input.files && input.files[0]; if (!file) return;
+        if (file.size > 1024 * 1024) { showToast('That file is too large for a WHMP draft (limit 1 MB).', 'error'); return; }
+        const rd = new FileReader(); rd.onload = function () { wbImportText(String(rd.result || ''), file.name); }; rd.onerror = function () { showToast('The file could not be read.', 'error'); }; rd.readAsText(file);
+    }
+    function wbHasContent() { return Object.keys(WB.d).some(function (k) { if (k === 'version' || k === 'eval_freq') return false; const v = WB.d[k]; return Array.isArray(v) ? v.length > 0 : (v && typeof v === 'object') ? !!(v.items && v.items.length) : String(v || '').trim().length > 0; }); }
+    async function wbImportText(text, fileName) {
+        let data; try { data = JSON.parse(text); } catch (e) { showToast('That file is not valid JSON.', 'error'); return; }
+        if (!data || data.format !== 'StopBIRDSTRIKE-whmp-draft' || !data.data || typeof data.data !== 'object') { showToast('That is not a StopBIRDSTRIKE WHMP draft file.', 'error'); return; }
+        const clean = wbSanitize(data.data), when = data.exportedAt && !isNaN(Date.parse(data.exportedAt)) ? rcEsc(rcWhen(data.exportedAt)) : 'an unknown date';
+        if (wbHasContent()) {
+            const r = await appDialog({ title: 'Import WHMP draft', message: '<p>The file <em>' + rcEsc(wbCleanStr(fileName, 80)) + '</em> was exported on ' + when + '.</p><p class="mt-2">Importing replaces the draft that is in this browser now. Export a backup first if you want to keep it.</p>', buttons: [{ id: 'cancel', label: 'Cancel' }, { id: 'replace', label: 'Replace my draft', kind: 'danger' }], focus: 'cancel' });
+            if (r !== 'replace') return;
+        }
+        WB.d = clean; wbDefaults(); WB.step = 0; wbSaveNow(); wbMetaTouch('import'); wbRender(); showToast('Draft imported: ' + wbDoneCount() + ' of ' + wbTotal() + ' sections complete.', 'success');
+    }
+
+    function wbParaHtml(v) { return wbEsc(String(v)).replace(/\[([^\]]+)\]/g, '<span class="todo">[$1]</span>').replace(/\n/g, '<br>'); }
+    function wbTidyTables(html) { return html.replace(/<table>(<tr>(?:<th>.*?<\/th>)+<\/tr>)([\s\S]*?)<\/table>/g, function (m, h, rest) { return '<table><thead>' + h + '</thead><tbody>' + rest + '</tbody></table>'; }); }
+    function wbReportHtml(forWord) {
+        const d = WB.d, T = function (v) { return String(v == null ? '' : v).trim(); }, todo = '<span class="todo">[To be completed]</span>';
+        const sections = WB_STEPS.filter(function (s) { return !s.final; });
+        const secNo = {}; sections.forEach(function (s, i) { secNo[s.id] = i + 1; });
+        const body = sections.map(function (s, i) {
+            let h = '<h2>' + (i + 1) + '. ' + wbEsc(s.title) + ' <span class="cl">' + wbEsc(s.clause) + '</span></h2>';
+            s.fields.forEach(function (f) {
+                const v = d[f.id];
+                if (f.type === 'table') {
+                    const rows = (Array.isArray(v) ? v : []).filter(function (r) { return !r.ex; });
+                    if (!rows.length) { if (f.req) h += '<p class="fld"><span class="lab">' + wbEsc(f.label) + '</span> ' + todo + '</p>'; return; }
+                    h += '<p class="lab">' + wbEsc(f.label) + '</p><table><tr>' + f.cols.map(function (c) { return '<th>' + wbEsc(c.label) + '</th>'; }).join('') + '</tr>' + rows.map(function (r) { return '<tr>' + f.cols.map(function (c) { return '<td>' + (T(r[c.k]) ? wbParaHtml(T(r[c.k])) : '') + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>';
+                } else if (f.type === 'risk') {
+                    const items = v && Array.isArray(v.items) ? v.items : [];
+                    if (!items.length) { if (!T(d.risk_manual)) h += '<p class="fld"><span class="lab">' + wbEsc(f.label) + '</span> ' + todo + '</p>'; return; }
+                    h += '<p class="lab">' + wbEsc(f.label) + ' <span class="small">(snapshot from the StopBIRDSTRIKE risk calculator, ' + wbEsc(rcWhen(v.at)) + ')</span></p><table><tr><th>#</th><th>Species</th><th>Probability</th><th>Severity</th><th>Score</th><th>Risk level</th></tr>' + items.map(function (it, k) { return '<tr><td>' + (k + 1) + '</td><td>' + wbEsc(it.name) + '</td><td>' + wbEsc(it.prob) + '</td><td>' + wbEsc(it.sev) + '</td><td>' + wbEsc(it.score) + '</td><td class="rl' + it.level + '">Level ' + it.level + ' (' + wbEsc(it.colour) + ')</td></tr>'; }).join('') + '</table><p class="small">Risk levels as defined in Doc 9137 Clause 3.4.3. The colour allocation is illustrative.</p>';
+                } else if (f.type === 'checks') {
+                    const sel = Array.isArray(v) ? v : [];
+                    if (!sel.length && !f.req) { h += '<p class="lab">' + wbEsc(f.label) + '</p><p class="small">None selected.</p>'; return; }
+                    h += '<p class="lab">' + wbEsc(f.label) + '</p>' + (sel.length || !f.req ? '' : todo) + '<ul class="cb">' + f.options.map(function (o) { return '<li>' + (sel.indexOf(o) >= 0 ? '&#9745;' : '&#9744;') + ' ' + wbEsc(o) + '</li>'; }).join('') + '</ul>';
+                } else if (f.type === 'textarea') {
+                    if (T(v) || f.req) h += '<div class="lab">' + wbEsc(f.label) + '</div><div class="txt">' + (T(v) ? wbParaHtml(T(v)) : todo) + '</div>';
+                } else {
+                    if (T(v) || f.req) h += '<p class="fld"><span class="lab">' + wbEsc(f.label) + ':</span> ' + (T(v) ? wbParaHtml(T(v)) : todo) + '</p>';
+                }
+            });
+            return h;
+        }).join('');
+        const letters = WB_STEPS.filter(function (s) { return s.letter; });
+        const appA = '<h2 class="appx">Appendix A. Annual evaluation checklist <span class="cl">Clause 9.2.3</span></h2><p class="small">Answer yes or no. If an answer is negative or unclear, establish measures to address the shortcoming (Clause 9.2.3).</p><table><tr><th>#</th><th>Question</th><th>Yes</th><th>No</th><th>Comment and action</th></tr>' + WB_QUESTIONS.map(function (q, i) { return '<tr><td>' + (i + 1) + '</td><td>' + wbEsc(q) + '</td><td></td><td></td><td></td></tr>'; }).join('') + '</table>';
+        const appB = '<h2 class="appx">Appendix B. Document control</h2><table><tr><th>Version</th><th>Date</th><th>Description of change</th><th>Prepared by</th><th>Approved by</th></tr><tr><td>' + wbEsc(T(d.version) || '1.0') + '</td><td>' + wbEsc(T(d.issue_date)) + '</td><td>Initial draft</td><td>' + wbEsc(T(d.wm_name)) + '</td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></table>';
+        const appC = '<h2>Appendix C. Cross-reference to the minimum contents</h2><table><tr><th>Doc 9137 Clause 9.1.1.6</th><th>Content</th><th>Section</th><th>Status</th></tr>' + letters.map(function (s) { return '<tr><td>' + s.letter + ')</td><td>' + wbEsc(s.title) + '</td><td>' + secNo[s.id] + '</td><td>' + (wbStepDone(s) ? 'Complete' : '<span class="todo">To be completed</span>') + '</td></tr>'; }).join('') + '</table>';
+        const toc = '<ol class="toc">' + sections.map(function (s) { return '<li>' + wbEsc(s.title) + '</li>'; }).join('') + '<li>Appendix A. Annual evaluation checklist</li><li>Appendix B. Document control</li><li>Appendix C. Cross-reference to the minimum contents</li></ol>';
+        const css = '@page{size:A4;margin:16mm 14mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font:12px/1.55 Arial,Helvetica,sans-serif;color:#111;margin:0}' +
+            '.bar{position:sticky;top:0;background:#0f172a;color:#fff;padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;z-index:2}.bar button{background:#f59e0b;border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}.bar span{font-size:12px;opacity:.85}@media print{.bar{display:none}}' +
+            '.page{max-width:900px;margin:0 auto;padding:18px 22px}.cover{break-after:page;min-height:230mm;display:flex;flex-direction:column;justify-content:center;border-bottom:3px solid #f59e0b;margin-bottom:18px;padding-bottom:22px}.cover .kick{color:#b45309;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:11px}.cover h1{font-size:30px;line-height:1.15;margin:8px 0 14px}.cover table{width:auto;max-width:520px}.cover td{border:0;border-bottom:1px solid #e2e8f0;padding:5px 14px 5px 0}.cover td:first-child{color:#475569;white-space:nowrap}.draft{display:inline-block;border:2px solid #b91c1c;color:#b91c1c;font-weight:700;padding:2px 10px;border-radius:6px;margin-top:14px}' +
+            'h2{font-size:15px;margin:26px 0 8px;border-bottom:2px solid #f59e0b;padding-bottom:4px;break-after:avoid}.cl{font-size:10px;font-weight:400;color:#64748b;margin-left:6px}.lab{font-weight:700;color:#334155;margin:10px 0 2px}.fld{margin:6px 0}.txt{margin:0 0 8px}.small{font-size:11px;color:#475569}' +
+            '.todo{background:#fef3c7;color:#92400e;padding:0 3px;border-radius:3px;font-weight:600}table{border-collapse:collapse;width:100%;margin:6px 0 10px}th,td{border:1px solid #cbd5e1;padding:5px 7px;text-align:left;vertical-align:top}th{background:#f1f5f9;font-size:11px}tr{break-inside:avoid}thead{display:table-header-group}.lab,h3{break-after:avoid}h2.appx{break-before:page}ul.cb{list-style:none;margin:4px 0 8px;padding:0}ul.cb li{margin:2px 0}.toc{margin:8px 0 18px;padding-left:20px}.rl1{background:#d1fae5}.rl2{background:#fef3c7}.rl3{background:#fee2e2}' +
+            '.foot{margin-top:24px;border-top:1px solid #cbd5e1;padding-top:8px;font-size:10.5px;color:#475569}';
+        const cover = '<div class="cover"><div class="kick">Wildlife Hazard Management Programme</div><h1>' + (T(d.aerodrome) ? wbEsc(d.aerodrome) : todo) + (T(d.icao) ? ' (' + wbEsc(d.icao) + ')' : '') + '</h1><table><tr><td>Aerodrome operator</td><td>' + (T(d.operator) ? wbEsc(d.operator) : todo) + '</td></tr>' + (T(d.country) ? '<tr><td>Country or State</td><td>' + wbEsc(d.country) + '</td></tr>' : '') + (T(d.accountable) ? '<tr><td>Accountable manager</td><td>' + wbEsc(d.accountable) + '</td></tr>' : '') + '<tr><td>Wildlife manager or coordinator</td><td>' + (T(d.wm_name) ? wbEsc(d.wm_name) + (T(d.wm_contact) ? ', ' + wbEsc(d.wm_contact) : '') : todo) + '</td></tr><tr><td>Version</td><td>' + wbEsc(T(d.version) || '1.0') + '</td></tr><tr><td>Date of issue</td><td>' + (T(d.issue_date) ? wbEsc(d.issue_date) : todo) + '</td></tr><tr><td>Next review due</td><td>' + (T(d.review_date) ? wbEsc(d.review_date) : todo) + '</td></tr></table><div><span class="draft">DRAFT FOR REVIEW AND APPROVAL</span></div><p class="small" style="margin-top:18px">Prepared with the StopBIRDSTRIKE WHMP builder, following the minimum contents of ICAO Doc 9137 Airport Services Manual, Part 3, Wildlife Hazard Management (5th edition, 2020), Clause 9.1.1.6. Items highlighted in amber still need information from the aerodrome.</p></div>';
+        const title = 'WHMP draft ' + (T(d.aerodrome) || 'aerodrome') + ' ' + rcDateStamp();
+        const bar = forWord ? '' : '<div class="bar"><button onclick="window.print()">Print or save as PDF</button><span>In the print window, choose Save as PDF as the destination.</span></div>';
+        return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + wbEsc(title) + '</title><style>' + css + '</style></head><body>' + bar + wbTidyTables('<div class="page">' + cover + '<h2>Contents</h2>' + toc + body + appA + appB + appC) + '<div class="foot">This is a draft prepared with a screening and organising tool. It does not make the programme compliant by itself. It must be reviewed, adapted to the aerodrome and approved by the aerodrome operator, in line with the requirements of the State. Prepared with the StopBIRDSTRIKE WHMP builder &middot; waleedmahrous.com</div></div></body></html>';
+    }
+    function wbPreview() {
+        if (WB.timer) wbSaveNow();
+        const f = document.getElementById('rcReportFrame'), m = document.getElementById('rcReportModal'); if (!f || !m) return;
+        if (typeof fvUpdate === 'function') fvUpdate();
+        RPT_BUILDER = wbReportHtml; f.srcdoc = wbReportHtml(); m.classList.add('open'); document.body.style.overflow = 'hidden';
+    }
+    function wbDownloadDoc() {
+        if (WB.timer) wbSaveNow();
+        try { rcDownload(wbReportHtml(true), 'application/msword', 'StopBIRDSTRIKE_WHMP_draft_' + rcDateStamp() + '.doc'); showToast('Word file downloaded. It opens in Word, where you may want to adjust the layout.', 'success'); }
+        catch (err) { showToast('Download is not available here. Open the platform in its own browser tab and try again.', 'warning'); }
     }
 
     // ─── HELPERS ADDED IN V4 ──────────────────────────────────────────────────
@@ -5737,17 +6314,6 @@
         b.classList.toggle('flex', visible);
     }
 
-    // Paste the Web app URL of your Google Apps Script here to also save every registration in a Google Sheet.
-    let REG_SHEET_URL = '';
-    function rgSheetPost(payload) {
-        if (!REG_SHEET_URL) return;
-        try {
-            const body = new URLSearchParams(); Object.keys(payload).forEach(k => body.append(k, payload[k]));
-            fetch(REG_SHEET_URL, { method: 'POST', mode: 'no-cors', body: body, keepalive: true })
-                .then(() => rgLog({ id: payload.submission_id, transport: 'sheet', attempt: 1, status: 'sent', ok: true }))
-                .catch(err => rgLog({ id: payload.submission_id, transport: 'sheet', attempt: 1, status: 0, ok: false, error: String((err && err.message) || err) }));
-        } catch (e) {}
-    }
     function rgNewId() { return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
 
     // Same field names the original dashboard used (name, email, role ...) plus three extras for easy sorting and de-duplication.
@@ -5820,7 +6386,6 @@
 
     async function sendRegistration(payload, opts) {
         opts = opts || {};
-        if (!opts.silent) rgSheetPost(payload);
         const wait = ms => new Promise(r => setTimeout(r, ms));
         let attempt = 0;
         for (;;) {
@@ -5874,14 +6439,17 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        window.__sbsBooting = true; setTimeout(() => { window.__sbsBooting = false; }, 60);
         loadFont();
-        fcInit();
+        fvInit();
         embedInit();
+        fcInit();
         initCountryDropdowns();
         renderFact();
         dykInit();
         emInit();
         rcInit();
+        wbLoad();
         loadState();
         retryPendingRegistration();
         window.addEventListener('online', retryPendingRegistration);
