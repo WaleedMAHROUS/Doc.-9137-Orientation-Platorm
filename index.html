@@ -246,6 +246,8 @@
 
         /* movable text-size controls */
         #fontControls { z-index:10000; }
+        /* v16: while a dialog is open the text-size control goes underneath it, so it can never cover the dialog's close button */
+        html:has(#aboutModal.open, .sbs-modal.open) #fontControls { z-index:9000; }
         .font-grip { position:relative; width:40px; height:22px; display:flex; align-items:center; justify-content:center; cursor:grab; touch-action:none; border-radius:999px; user-select:none; }
         #fontControls.dragging .font-grip { cursor:grabbing; }
         .grip-bars { display:block; width:18px; height:2px; border-radius:2px; background:#64748b; box-shadow:0 5px 0 #64748b; margin-bottom:5px; }
