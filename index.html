@@ -51,6 +51,7 @@
         #siteFooter { background:#020617; border-top:1px solid #1e293b;
                       padding:10px 24px; display:flex; align-items:center;
                       justify-content:space-between; flex-wrap:wrap; gap:8px; flex-shrink:0; }
+        .ft-disc { flex-basis:100%; margin:2px 0 0; font-size:10px; line-height:1.5; color:#94a3b8; }
         .footer-link { color:#94a3b8; font-size:0.65rem; font-weight:600;
                        text-decoration:none; text-transform:uppercase; letter-spacing:0.08em;
                        transition:color 0.2s; display:inline-flex; align-items:center; gap:5px; }
@@ -588,6 +589,7 @@ html[data-theme="light"] .about-cta-btn{border-radius:12px;border:1px solid #cbd
 html[data-theme="light"] .about-cta-btn:hover{border-color:#f59e0b;background:#e2e8f0;color:#92400e}
 html[data-theme="light"] .about-cta-btn .cta-icon{border-radius:8px}
 html[data-theme="light"] #siteFooter{background:#f1f5f9;border-top:1px solid #e2e8f0}
+html[data-theme="light"] .ft-disc{color:#475569}
 html[data-theme="light"] .footer-link{color:#4b5a6e}
 html[data-theme="light"] .footer-link:hover{color:#92400e}
 html[data-theme="light"] #mobileNav{background:#f1f5f9;border-top:1px solid #e2e8f0;box-shadow:0 -4px 24px rgba(15,23,42,0.14)}
@@ -825,6 +827,7 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
                             <div class="ab-chip"><i class="fa-solid fa-calculator"></i><span>A risk calculator and a full method guide for Chapter 3</span></div>
                             <div class="ab-chip"><i class="fa-solid fa-award"></i><span>A final master exam and a downloadable completion certificate</span></div>
                         </div>
+                        <p class="ab-note"><i class="fa-solid fa-scale-balanced"></i> This programme is an independent orientation aid written by StopBIRDSTRIKE. It explains Doc 9137, Airport Services Manual, Part 3, Wildlife Hazard Management (5th edition, 2020) in its own words, with clause numbers given as references. It is not an ICAO publication and does not replace the manual. For authoritative requirements, read the current ICAO documents and your State's regulations. "ICAO" and "Doc 9137" are used only to identify the source.</p>
                         <p class="ab-note"><i class="fa-solid fa-circle-info"></i> This is a training tool. It does not replace your aerodrome's own Wildlife Hazard Management Programme or a site-specific assessment by competent personnel.</p>
                     </div>
                 </details>
@@ -1157,7 +1160,7 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
                         </button>
                     </div>
                     <h2 class="text-3xl md:text-4xl font-black text-white mb-3">Wildlife Hazard Management<br>Orientation Platform</h2>
-                    <p class="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">Based entirely on ICAO Doc 9137 Airport Services Manual, Part 3 — Wildlife Hazard Management (5th Edition, 2020). Complete all 10 modules to earn your certification.</p>
+                    <p class="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">An independent orientation based on ICAO Doc 9137 Airport Services Manual, Part 3 — Wildlife Hazard Management (5th Edition, 2020). Not affiliated with or endorsed by ICAO. Complete all 10 modules to earn your certificate of completion.</p>
                 </div>
                 <form id="onboardingForm" onsubmit="handleRegistration(event)" class="bg-slate-950 p-6 md:p-8 rounded-2xl border border-slate-800 shadow-xl space-y-5">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -1281,7 +1284,7 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
             <div id="view-master-config" class="flex flex-col h-full fade-in hidden justify-center items-center p-8 bg-slate-950 relative">
                 <div class="max-w-2xl w-full bg-slate-900 border border-amber-500/30 p-10 rounded-2xl shadow-2xl text-center">
                     <i class="fa-solid fa-crown text-5xl text-amber-400 mb-6 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]"></i>
-                    <h2 class="text-3xl font-black text-white tracking-tight mb-2">Final Master Certification Exam</h2>
+                    <h2 class="text-3xl font-black text-white tracking-tight mb-2">Final Master Exam</h2>
                     <p class="text-sm text-slate-400 mb-8 leading-relaxed">You have completed all 10 modules of ICAO Doc 9137 Part 3. Select the depth of your final evaluation. Questions are drawn at random from a bank of <span id="poolCount">300</span> clause-referenced questions covering all chapters. Questions you have not seen come first, so a retake gives you a new set.</p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                         <button onclick="startMasterExam(25)" class="p-4 border border-slate-700 bg-slate-800 rounded-xl hover:border-amber-500 transition group">
@@ -1311,8 +1314,8 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
                         <div class="inline-flex justify-center items-center w-20 h-20 bg-emerald-500/10 text-emerald-400 rounded-full text-4xl mb-4 border border-emerald-500/30">
                             <i class="fa-solid fa-award"></i>
                         </div>
-                        <h2 class="text-4xl font-black text-white tracking-tight mb-2">Certification Granted!</h2>
-                        <p class="text-slate-400">You have mastered the ICAO Doc 9137 Part 3 Wildlife Hazard Management framework.</p>
+                        <h2 class="text-4xl font-black text-white tracking-tight mb-2">Certificate Earned!</h2>
+                        <p class="text-slate-400">You have completed the StopBIRDSTRIKE orientation based on ICAO Doc 9137 Part 3, Wildlife Hazard Management.</p>
                     </div>
                     <canvas id="certCanvas" width="1056" height="816" class="hidden"></canvas>
                     <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-left">
@@ -1865,6 +1868,7 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
                 <i class="fa-solid fa-envelope"></i> Contact <span class="ft-nt">(new tab)</span>
             </a>
         </div>
+        <p class="ft-disc">StopBIRDSTRIKE is an independent educational resource. It is not affiliated with, endorsed by or approved by ICAO. ICAO Doc 9137 is &copy; ICAO 2020, all rights reserved. This platform does not reproduce the manual; obtain it from ICAO.</p>
     </footer>
 
     <script>
@@ -5752,7 +5756,7 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
         if (noteEl) noteEl.textContent = d.unseen >= shuffled.length
             ? `${shuffled.length} questions drawn from a bank of ${d.total}. All of them are new to you.`
             : `${shuffled.length} questions drawn from a bank of ${d.total}. Unseen questions come first, then the ones you saw longest ago.`;
-        document.getElementById('quizTitle').textContent = `Master Certification Exam — ${shuffled.length} Questions`;
+        document.getElementById('quizTitle').textContent = `Master Exam — ${shuffled.length} Questions`;
         renderQuizQuestions(shuffled, -1);
         document.getElementById('view-quiz').classList.remove('hidden');
     }
@@ -5808,11 +5812,11 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
         ctx.fillText(`${STATE.user.role} — ${STATE.user.country}`, W/2, 308);
         ctx.fillStyle = '#94a3b8';
         ctx.font = '13px Inter, sans-serif';
-        ctx.fillText('has successfully completed the ICAO Doc 9137 Part 3 Wildlife Hazard Management Orientation', W/2, 348);
+        ctx.fillText('has successfully completed the StopBIRDSTRIKE Wildlife Hazard Management Orientation', W/2, 348);
         // Course
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 18px Inter, sans-serif';
-        ctx.fillText('ICAO DOC 9137 — AIRPORT SERVICES MANUAL', W/2, 400);
+        ctx.fillText('BASED ON ICAO DOC 9137, AIRPORT SERVICES MANUAL', W/2, 400);
         ctx.fillStyle = '#f59e0b';
         ctx.font = 'bold 15px Inter, sans-serif';
         ctx.fillText('Part 3: Wildlife Hazard Management (5th Edition, 2020)', W/2, 425);
@@ -5835,7 +5839,7 @@ html[data-theme="light"] .rc-lv4, html[data-theme="light"] .rc-lv4-t { color:#99
         ctx.fillText('Waleed MAHROUS — Founder, StopBIRDSTRIKE | waleedmahrous.com', W/2, 558);
         ctx.fillStyle = '#475569';
         ctx.font = '11px Inter, sans-serif';
-        ctx.fillText('This certificate is issued upon completion of all ICAO Doc 9137 Part 3 training modules and passing the Master Certification Exam.', W/2, 590);
+        ctx.fillText('Issued by StopBIRDSTRIKE on completion of all training modules and the Master Exam. Not an ICAO certificate or an official qualification.', W/2, 590);
         // Watermark
         ctx.globalAlpha = 0.04;
         ctx.fillStyle = '#f59e0b';
