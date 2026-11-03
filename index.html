@@ -320,8 +320,8 @@
         .ab-flow span { display:block; font-weight:800; color:#fff; font-size:0.75rem; }
         .ab-flow small { display:block; color:#64748b; font-size:0.6875rem; }
         .ab-list { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
-        .ab-list li { display:flex; gap:10px; align-items:flex-start; }
-        .ab-list i { color:#34d399; margin-top:4px; flex:none; font-size:11px; }
+        .ab-list li { display:block; position:relative; padding-left:22px; }
+        .ab-list i { color:#34d399; position:absolute; left:0; top:4px; font-size:11px; }
         .ab-connect { margin-top:14px; padding:16px; border-radius:14px; border:1px solid rgba(245,158,11,0.2); background:rgba(245,158,11,0.03); }
         .app-dlg { align-items:flex-start; padding-top:14vh; }
         .app-dlg .sbs-card { border-color:#f59e0b; box-shadow:0 0 0 1px rgba(245,158,11,0.25), 0 32px 80px rgba(0,0,0,0.7); }
@@ -466,7 +466,7 @@
                     <summary><span class="ab-ico bg-rose-500/15 text-rose-400"><i class="fa-solid fa-lock"></i></span><span class="ab-title">Your data and privacy</span><i class="fa-solid fa-chevron-down ab-chev"></i></summary>
                     <div class="ab-body">
                         <ul class="ab-list">
-                            <li><i class="fa-solid fa-check"></i>Your progress, risk calculator register, WHMP draft and settings are stored in <strong class="text-white">your browser, on this device</strong>. They are not uploaded for the training or the calculator.</li>
+                            <li><i class="fa-solid fa-check"></i>Your progress, the list of quiz questions you have already seen, risk calculator register, WHMP draft and settings are stored in <strong class="text-white">your browser, on this device</strong>. They are not uploaded for the training or the calculator.</li>
                             <li><i class="fa-solid fa-check"></i>Use <strong class="text-white">Export JSON</strong> in the calculator to keep a backup file, or to import it later on another device.</li>
                             <li><i class="fa-solid fa-check"></i>Registration details are sent to the platform owner so that your registration can be recorded.</li>
                             <li><i class="fa-solid fa-check"></i><strong class="text-white">Log out and reset</strong> erases the data stored in this browser. Export a backup first if you want to keep it.</li>
@@ -828,6 +828,7 @@
                     <div>
                         <span class="text-[10px] font-bold text-sky-400 tracking-widest uppercase mb-1 block">Knowledge Assessment</span>
                         <h2 id="quizTitle" class="text-xl font-bold text-white"></h2>
+                        <p id="quizBankNote" class="text-[11px] text-slate-500 mt-1"></p>
                     </div>
                     <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-lg text-center">
                         <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Pass Requirement</span>
@@ -866,7 +867,7 @@
                 <div class="max-w-2xl w-full bg-slate-900 border border-amber-500/30 p-10 rounded-2xl shadow-2xl text-center">
                     <i class="fa-solid fa-crown text-5xl text-amber-400 mb-6 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]"></i>
                     <h2 class="text-3xl font-black text-white tracking-tight mb-2">Final Master Certification Exam</h2>
-                    <p class="text-sm text-slate-400 mb-8 leading-relaxed">You have completed all 10 modules of ICAO Doc 9137 Part 3. Select the depth of your final evaluation. Questions are drawn at random, without repetition, from a bank of <span id="poolCount">220</span> clause-referenced questions covering all chapters.</p>
+                    <p class="text-sm text-slate-400 mb-8 leading-relaxed">You have completed all 10 modules of ICAO Doc 9137 Part 3. Select the depth of your final evaluation. Questions are drawn at random from a bank of <span id="poolCount">300</span> clause-referenced questions covering all chapters. Questions you have not seen come first, so a retake gives you a new set.</p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                         <button onclick="startMasterExam(25)" class="p-4 border border-slate-700 bg-slate-800 rounded-xl hover:border-amber-500 transition group">
                             <span class="block text-2xl font-black text-white group-hover:text-amber-400">25</span>
@@ -3898,9 +3899,1044 @@
  }
 ];
 
-    // ─── MASTER EXAM QUESTION POOL ───────────────────────────────────────────
-    const MASTER_POOL = ICAO_MODULES.slice(1).flatMap(m => (m.questions || []).map(q => ({...q, chapter: m.navTitle})))
-        .concat(MASTER_EXTRA.map(q => ({...q, chapter: q.ch})));
+    // ─── NEW QUESTIONS ADDED IN V12 (each checked against the text of Doc 9137 Part 3) ───
+    const NEW_Q = [
+ {
+  "q": "According to Clause 1.1.2, which situation is likely to increase the probability of negative effects?",
+  "options": [
+   "Wildlife hazards on the aerodrome or while passing through critical airspace.",
+   "Wildlife that stays far outside the critical airspace of the aerodrome at all times.",
+   "Wildlife that is present only at night, when no flights are scheduled.",
+   "Wildlife that has become fully used to aircraft noise and no longer moves."
+  ],
+  "a": 0,
+  "rat": "Clause 1.1.2: Wildlife hazards on the aerodrome or while passing through critical airspace are likely to increase the probability of negative effects.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "What does Clause 1.1.3 say wildlife risks fluctuate with?",
+  "options": [
+   "The monthly number of flights scheduled by each airline.",
+   "The daily and seasonal cycles of wildlife activity.",
+   "The price of fuel and the cost of control equipment.",
+   "The annual budget approved for the wildlife team."
+  ],
+  "a": 1,
+  "rat": "Clause 1.1.3: Wildlife risks fluctuate with the daily and seasonal cycles of wildlife activity.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "Which cause of change in the species and numbers of wildlife around aerodromes over the years does Clause 1.1.3 give?",
+  "options": [
+   "Changes in the colour schemes of aircraft liveries and terminal buildings.",
+   "The retirement of older air traffic controllers from the control tower.",
+   "Land use and environmental changes, such as agriculture and urbanization.",
+   "The introduction of new paper forms for reporting strikes to the State."
+  ],
+  "a": 2,
+  "rat": "Clause 1.1.3: The species and number of wildlife at and around aerodromes may vary over the years due to land use and environmental changes, such as agricultural practices, urbanization, conservation and climate change.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "In the accident of 3 April 1912 at Long Beach described in Clause 1.2.1, what did the flock of gulls do?",
+  "options": [
+   "It broke the windscreen, so the pilot lost sight of the coastline and of the beach.",
+   "It blocked the engine intake, so the aircraft lost all of its power at once.",
+   "It damaged the tail, so the aircraft could no longer turn to the left.",
+   "It jammed the aircraft's controls, so the aircraft plunged into the ocean."
+  ],
+  "a": 3,
+  "rat": "Clause 1.2.1: Calbraith Perry Rodgers' Wright Flyer flew into a flock of gulls that jammed the aircraft's controls, causing it to plunge out of control into the ocean.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "How many engines ingested birds in the Boston Logan accident of 4 October 1960, according to Clause 1.2.3?",
+  "options": [
+   "Three of the aircraft's four engines.",
+   "Both engines of the aircraft, which was a twin-engined type.",
+   "Only one of the four engines, on the left wing.",
+   "All four of the aircraft engines at the same moment."
+  ],
+  "a": 0,
+  "rat": "Clause 1.2.3: The starlings were ingested into three of the aircraft's four engines, causing the aircraft to lose power, stall and crash into the harbour.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "What does Clause 1.2.7 say about strikes involving animals other than birds?",
+  "options": [
+   "They are too rare to be included in any recorded data.",
+   "They may also have a severe outcome.",
+   "They occur only at aerodromes located in tropical regions.",
+   "They never cause damage to the landing gear of an aircraft."
+  ],
+  "a": 1,
+  "rat": "Clause 1.2.7: Although the majority of wildlife strikes involve birds, those involving other animals may also have a severe outcome.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "What is the objective of wildlife hazard management at aerodromes, according to Clause 1.3.1?",
+  "options": [
+   "To remove every kind of wildlife permanently from the whole area around the aerodrome.",
+   "To protect the aerodrome operator from legal claims made after a strike.",
+   "To reduce the risk of a wildlife strike by implementing appropriate mitigation measures.",
+   "To record as many strikes as possible for the international database."
+  ],
+  "a": 2,
+  "rat": "Clause 1.3.1: The objective is to reduce the risk of a wildlife strike by implementing appropriate mitigation measures.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "Which measures does Clause 1.3.5 say may be used to manage wildlife hazards?",
+  "options": [
+   "Closing the runway whenever any bird is seen and moving the aerodrome site.",
+   "Banning all flights at dawn and dusk and fining the neighbouring farms.",
+   "Limiting reports to a single form and reducing night patrols to save costs.",
+   "Habitat manipulation, harassment and repellent techniques, and removal of wildlife."
+  ],
+  "a": 3,
+  "rat": "Clause 1.3.5: Measures may include, but are not limited to, manipulating habitats, harassment and repellent techniques and removal of wildlife.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "What indication of a collision can justify recording a strike without physical evidence, according to Clause 1.3.4 b)?",
+  "options": [
+   "Visual observation of the collision or acoustic perception of the impact.",
+   "A change in the weather report issued while the aircraft was in flight.",
+   "A statement from the airline's marketing department after the landing.",
+   "A routine inspection report completed one month after the flight."
+  ],
+  "a": 0,
+  "rat": "Clause 1.3.4(b): A reported collision with no physical evidence is still recorded when an indication exists, such as visual observation of the collision or acoustic perception of the impact.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "Which examples of incidents that could affect a flight does Clause 1.3.4 d) give?",
+  "options": [
+   "A scheduled engine change or a planned runway resurfacing.",
+   "A missed approach or an aborted take-off.",
+   "A late departure caused by a crew change at the gate.",
+   "A diversion caused by a medical emergency on board."
+  ],
+  "a": 1,
+  "rat": "Clause 1.3.4(d): Incidents or observations where wildlife presence could have an effect on a flight, for example a missed approach or an aborted take-off, should be recorded.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "To which aerodromes does Clause 1.3.8 say the manual applies?",
+  "options": [
+   "Only new aerodromes that are certified after the manual was published.",
+   "Only international aerodromes with scheduled passenger service.",
+   "Both existing and new aerodromes, including expansion projects.",
+   "Only aerodromes that have already recorded a fatal wildlife strike."
+  ],
+  "a": 2,
+  "rat": "Clause 1.3.8: The manual applies to both existing and new aerodromes, including expansion projects.",
+  "ch": "Chapter 1"
+ },
+ {
+  "q": "What does Clause 2.2.1.2 say the WHMP should represent?",
+  "options": [
+   "The maximum budget that the aerodrome operator may request each year.",
+   "The number of staff employed by the largest airline at the aerodrome.",
+   "The wildlife regulations of the State that borders the aerodrome.",
+   "The size and level of complexity of the aerodrome."
+  ],
+  "a": 3,
+  "rat": "Clause 2.2.1.2: The programme should represent the size and level of complexity of the aerodrome, taking into consideration hazardous species, the level of risk and the volume of flight operations.",
+  "ch": "Chapter 2"
+ },
+ {
+  "q": "Who may perform the front line role of wildlife controller, according to Clause 2.2.3?",
+  "options": [
+   "Any suitably trained and qualified member of aerodrome staff.",
+   "Only a certified biologist who is employed by the State authority.",
+   "Only a pilot who holds a valid type rating for the aircraft in use.",
+   "Only a police officer who has been seconded to the aerodrome."
+  ],
+  "a": 0,
+  "rat": "Clause 2.2.3: A wildlife controller performs the front line role and may be any suitably trained and qualified member of aerodrome staff.",
+  "ch": "Chapter 2"
+ },
+ {
+  "q": "How does Clause 2.2.4.4 say wildlife observation records should be written and supported?",
+  "options": [
+   "In each controller's own format, with a photograph of every bird seen.",
+   "On standardized templates, with maps showing the location of observations.",
+   "In a monthly summary only, without locations, to save time for the staff.",
+   "By voice message only, stored for no more than seven days in total."
+  ],
+  "a": 1,
+  "rat": "Clause 2.2.4.4: Records should be written using standardized templates, and it is recommended that they be accompanied by maps indicating the location of observations or control activities.",
+  "ch": "Chapter 2"
+ },
+ {
+  "q": "What period should periodic wildlife surveys cover, according to Clause 2.2.4.6?",
+  "options": [
+   "Only the migration season of each year.",
+   "Only the three months with the most reported strikes.",
+   "The entire year, to account for seasonal changes.",
+   "One representative week chosen by the wildlife manager."
+  ],
+  "a": 2,
+  "rat": "Clause 2.2.4.6: Wildlife surveys should cover the entire year to account for seasonal changes and should also consider different phases of the day.",
+  "ch": "Chapter 2"
+ },
+ {
+  "q": "Which species does Clause 2.2.4.18 say are attracted by large bodies of water?",
+  "options": [
+   "Small flocking birds.",
+   "Large birds of prey and mammals.",
+   "Gulls only, and no other species.",
+   "Shorebirds and waterfowl."
+  ],
+  "a": 3,
+  "rat": "Clause 2.2.4.18: Certain habitats attract species for food, water or shelter. Large bodies of water attract shorebirds and waterfowl.",
+  "ch": "Chapter 2"
+ },
+ {
+  "q": "Which action may ATC take in response to a potential wildlife strike hazard, according to Clause 2.3.2.3?",
+  "options": [
+   "Delay take-off or use alternative runways.",
+   "Close the aerodrome to all traffic for 24 hours.",
+   "Order the wildlife team to remove all birds by lethal control.",
+   "Instruct pilots to fly below 500 ft until the area is clear."
+  ],
+  "a": 0,
+  "rat": "Clause 2.3.2.3: ATC may take action or advise, for example by take-off delay, use of alternative runways for landing and take-off, or different routes and altitudes according to established procedures.",
+  "ch": "Chapter 2"
+ },
+ {
+  "q": "Why does Clause 2.3.3.3 highly recommend that pilots attend local aerodrome wildlife committees?",
+  "options": [
+   "They are the only stakeholders who have the authority to approve the WHMP.",
+   "Their unique vantage point gives them pertinent information on wildlife movements.",
+   "They are legally liable for every wildlife strike that occurs on the aerodrome.",
+   "They control the habitat management of all the neighbouring land and farms."
+  ],
+  "a": 1,
+  "rat": "Clause 2.3.3.3: Because of their unique vantage point, pilots can provide pertinent information on wildlife movements and activity during approach, landing and take-off.",
+  "ch": "Chapter 2"
+ },
+ {
+  "q": "According to Clause 3.1.1, what are safety risk assessment processes more frequently used for?",
+  "options": [
+   "Proving to regulators that no catastrophic strike can ever occur.",
+   "Setting the ticket prices paid by airline passengers.",
+   "Targeting scarce wildlife control resources at the most important areas.",
+   "Selecting the species that will be hunted in each season."
+  ],
+  "a": 2,
+  "rat": "Clause 3.1.1: More frequently, risk assessment processes are used to allow potentially scarce wildlife control resources to be targeted at the most important areas.",
+  "ch": "Chapter 3"
+ },
+ {
+  "q": "What should the results of a risk assessment matrix be used for, according to Clause 3.1.8?",
+  "options": [
+   "To replace the strike reporting system with yearly estimates made by the State.",
+   "To set the staffing level of the air traffic control unit during peak hours.",
+   "To decide the maximum number of daily flights allowed at the aerodrome.",
+   "To prioritize wildlife management techniques and methods, documented in the WHMP."
+  ],
+  "a": 3,
+  "rat": "Clause 3.1.8: The results of a risk assessment matrix should be used to prioritize wildlife management techniques and methods, and these actions should be documented in the WHMP.",
+  "ch": "Chapter 3"
+ },
+ {
+  "q": "Which data does Clause 3.2.1 say the probability of a wildlife strike should be calculated from?",
+  "options": [
+   "Wildlife incident data and current data on wildlife presence, location and behaviour.",
+   "Aircraft maintenance records and the financial results of each airline using the aerodrome.",
+   "Passenger numbers and the annual turnover of the aerodrome operator and its tenants.",
+   "Weather forecasts for the whole region and the construction age of the control tower."
+  ],
+  "a": 0,
+  "rat": "Clause 3.2.1: The probability of a wildlife strike should be calculated using wildlife incident data and current data on the presence, location and behaviour of wildlife in the aerodrome and its vicinity.",
+  "ch": "Chapter 3"
+ },
+ {
+  "q": "How may species that shy away from aircraft noise or learn to avoid aircraft be rated, according to Clause 3.2.9 a)?",
+  "options": [
+   "As very high probability.",
+   "As low probability.",
+   "As moderate probability.",
+   "As high probability."
+  ],
+  "a": 1,
+  "rat": "Clause 3.2.9(a): Species that shy away from aircraft noise or that learn to avoid aircraft could be rated as low probability.",
+  "ch": "Chapter 3"
+ },
+ {
+  "q": "How may species with low or erratic flights be rated, according to Clause 3.2.9 d)?",
+  "options": [
+   "As very low probability.",
+   "As low probability only.",
+   "As high or very high probability.",
+   "As moderate probability only."
+  ],
+  "a": 2,
+  "rat": "Clause 3.2.9(d): Species with low or erratic flights could be rated as high or very high probability.",
+  "ch": "Chapter 3"
+ },
+ {
+  "q": "How does Clause 3.3.5 say severity could be calculated when no data on the damage a species can cause is available?",
+  "options": [
+   "By the mass added to the average speed of the aircraft.",
+   "By the number of days the species is seen, divided by the strikes.",
+   "By the age of the birds multiplied by the season of the year.",
+   "By the mass multiplied by the type of flock."
+  ],
+  "a": 3,
+  "rat": "Clause 3.3.5: For species with no severity data, the severity could be calculated by the mass multiplied by the type of flock.",
+  "ch": "Chapter 3"
+ },
+ {
+  "q": "What does Clause 3.4.3 require for a Level 3 (Red, Intolerable) risk?",
+  "options": [
+   "Immediate action, with further action to reduce the risk.",
+   "None, because the risk is acceptable as it is.",
+   "A review of current action, because the risk can be tolerated.",
+   "Transfer of the risk to the airline after notification."
+  ],
+  "a": 0,
+  "rat": "Clause 3.4.3: Level 3 (red) is intolerable: take immediate action, because further action is required to reduce the risk.",
+  "ch": "Chapter 3"
+ },
+ {
+  "q": "What must be carried out before activities to manage habitats are undertaken, according to Clause 4.1.4?",
+  "options": [
+   "A public consultation with residents about the planned habitat changes.",
+   "A safety risk assessment identifying the hazardous wildlife and the root cause.",
+   "A complete removal of the vegetation on the aerodrome property.",
+   "A transfer of the responsibility to the neighbouring landowners."
+  ],
+  "a": 1,
+  "rat": "Clause 4.1.4: Before habitat management, a safety risk assessment that identifies the hazardous wildlife and the root cause of their association with specific habitats must first be carried out.",
+  "ch": "Chapter 4"
+ },
+ {
+  "q": "Which way of making ponded water inaccessible to birds does Clause 4.2.2.2 give as an example?",
+  "options": [
+   "Stocking it with fish so that predators keep the birds away.",
+   "Painting the surface black so that the birds avoid it completely.",
+   "Covering it with wires or netting to inhibit birds from landing.",
+   "Lighting it at night with strong floodlights near the runway."
+  ],
+  "a": 2,
+  "rat": "Clause 4.2.2.2: Water bodies can be made inaccessible, for example by covering them with wires or netting to inhibit birds from landing.",
+  "ch": "Chapter 4"
+ },
+ {
+  "q": "What does Clause 4.3.1.2 give as the key to effective habitat modification?",
+  "options": [
+   "Applying the same treatment to every part of the aerodrome at once.",
+   "Starting with whichever habitat is the cheapest to modify first.",
+   "Waiting for a strike to occur before any habitat is changed.",
+   "Removing attractions without introducing new ones that appeal to other species."
+  ],
+  "a": 3,
+  "rat": "Clause 4.3.1.2: The key is to remove existing attractions without introducing new enticements that may appeal to other species.",
+  "ch": "Chapter 4"
+ },
+ {
+  "q": "Where does Clause 4.3.1.3 say habitat attractants must be identified and managed?",
+  "options": [
+   "Landside as well as airside.",
+   "Only airside, near the runways and taxiways.",
+   "Only outside the aerodrome boundary fence.",
+   "Only in the areas where aircraft are parked."
+  ],
+  "a": 0,
+  "rat": "Clause 4.3.1.3: The aerodrome operator should manage habitat attractants on airside locations and also ensure that habitat attractants are identified and managed landside.",
+  "ch": "Chapter 4"
+ },
+ {
+  "q": "What does Clause 4.2.3.8 say should be considered in the design phase of buildings, hangars and bridges?",
+  "options": [
+   "The colour of the outer walls, so that the buildings stay cool in summer.",
+   "The attraction of hazardous wildlife, to minimize exposed areas for perching and nesting.",
+   "The cost of cleaning the structures, so that the maintenance budget is reduced.",
+   "The visual impact of the structures, so that they match the surrounding landscape."
+  ],
+  "a": 1,
+  "rat": "Clause 4.2.3.8: The attraction of hazardous wildlife should be considered in the design phase to minimize exposed areas that birds can use for perching and nesting.",
+  "ch": "Chapter 4"
+ },
+ {
+  "q": "According to Clause 5.1.3, how does wildlife first react when confronted with deterring or expelling techniques?",
+  "options": [
+   "It flies away immediately, whichever technique is used.",
+   "It ignores the technique until the controller has left the area.",
+   "It becomes 'alert' to a potential threat before it exhibits its response.",
+   "It approaches the source of the stimulus to examine it closely."
+  ],
+  "a": 2,
+  "rat": "Clause 5.1.3: When confronted with deterring or expelling techniques, all wildlife will initially become 'alert' to a potential threat before they exhibit their 'response'.",
+  "ch": "Chapter 5"
+ },
+ {
+  "q": "What does Clause 5.2.4 say is beneficial so that wildlife does not habituate to patrols?",
+  "options": [
+   "Using the same route at the same time on every day.",
+   "Patrolling only the areas that are far from the runways.",
+   "Replacing every patrol with fixed automatic devices.",
+   "Randomization of routes and wildlife controller behaviour."
+  ],
+  "a": 3,
+  "rat": "Clause 5.2.4: If the same path is followed on every occasion, wildlife may learn when it is safe to remain. Randomization of routes and wildlife controller behaviour is beneficial.",
+  "ch": "Chapter 5"
+ },
+ {
+  "q": "Which approach does Clause 5.3.1.1 give to lessen habituation to repellents?",
+  "options": [
+   "Use various repellent techniques in an integrated fashion.",
+   "Use the single most effective technique continuously.",
+   "Install the same device at fixed intervals around the aerodrome.",
+   "Avoid any lethal action in all circumstances."
+  ],
+  "a": 0,
+  "rat": "Clause 5.3.1.1: To lessen habituation, use each technique sparingly when target wildlife is present, use various techniques in an integrated fashion, and reinforce with occasional lethal action if necessary.",
+  "ch": "Chapter 5"
+ },
+ {
+  "q": "What hazard to aircraft may the use of pyrotechnics present, according to Clause 5.3.2.4?",
+  "options": [
+   "A radio interference hazard for the control tower.",
+   "A FOD hazard, which should be managed accordingly.",
+   "A hazard of blinding pilots during the final approach.",
+   "A hazard of attracting additional birds to the area."
+  ],
+  "a": 1,
+  "rat": "Clause 5.3.2.4: Using pyrotechnics may present a FOD hazard to aircraft, which should be managed accordingly.",
+  "ch": "Chapter 5"
+ },
+ {
+  "q": "On what does Clause 5.1.5 say a dynamic risk assessment should be based?",
+  "options": [
+   "The age of the wildlife team and the length of the shift on duty.",
+   "The purchase cost of each device and the budget approved for the year.",
+   "The likely reaction of species, aircraft movements and available control methods.",
+   "The colour of the aircraft and the time of day when it lands."
+  ],
+  "a": 2,
+  "rat": "Clause 5.1.5: A dynamic risk assessment based on the likely reaction of the species present, the location of aircraft movements at the time and the control methods available enables the most appropriate course of action.",
+  "ch": "Chapter 5"
+ },
+ {
+  "q": "According to Clause 6.1, where are advancing technologies and procedures particularly important?",
+  "options": [
+   "In replacing the need for any wildlife hazard management plan at aerodromes with low traffic.",
+   "In certifying the pilots who fly into aerodromes that report frequent strikes.",
+   "In reducing the charges that airlines pay for strike reporting systems.",
+   "In dealing with the significant hazards posed by wildlife in the vicinity of aerodromes."
+  ],
+  "a": 3,
+  "rat": "Clause 6.1: Such technologies and procedures are particularly important in dealing with the significant hazards posed by wildlife in the vicinity of aerodromes.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "What can satellite imagery aid in monitoring, according to Clause 6.2?",
+  "options": [
+   "Off-aerodrome sites that may attract hazardous wildlife.",
+   "Only the height of the grass inside the runway strip during the growing season.",
+   "The exact number of birds that are resting on each pond near the airport.",
+   "The speed of aircraft during the take-off roll on the main runway."
+  ],
+  "a": 0,
+  "rat": "Clause 6.2: Satellite imagery can aid in monitoring off-aerodrome sites that may attract hazardous wildlife.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "Why does Clause 6.2 describe satellite imagery as becoming critical evidence?",
+  "options": [
+   "It replaces every other kind of wildlife survey, so ground observers become unnecessary.",
+   "It gives quantifiable data on land uses for habitat management measures and communication with stakeholders.",
+   "It proves that a particular strike was caused by one specific bird species.",
+   "It is the only type of evidence that regulators in all States will accept."
+  ],
+  "a": 1,
+  "rat": "Clause 6.2: Quantifiable data on land uses becomes critical evidence for habitat management measures and for communicating with stakeholders.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "What does Clause 6.3.1 say is shown when strikes are related to specific points on the runway and mapped with GIS?",
+  "options": [
+   "The most profitable runway for the busiest airline.",
+   "The ideal position for a new terminal building.",
+   "Hotspots where strikes occur on the runway.",
+   "The preferred route of ground vehicles on the apron."
+  ],
+  "a": 2,
+  "rat": "Clause 6.3.1: Wildlife strikes can be related to specific points on the runway and mapped with GIS to show hotspots where strikes occur.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "Why does Clause 6.3.1 say GIS suits the data collected as part of a WHMP?",
+  "options": [
+   "All of that data is entered by satellite, so no manual input is ever needed by staff.",
+   "That data is always confidential by law, so it can only be displayed on maps.",
+   "That data is limited to the number of staff on duty during each separate shift.",
+   "Much of that data is spatially referenced, because it relates to a specific geographical location."
+  ],
+  "a": 3,
+  "rat": "Clause 6.3.1: Much of the data collected as part of a WHMP is spatially referenced, so GIS can analyse patterns of wildlife observations and control interventions as they relate to aircraft operations.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "What time span can radar datasets cover to reveal wildlife movement patterns, according to Clause 6.4.1.4?",
+  "options": [
+   "Anywhere from a single season to several years.",
+   "Only a single night of continuous observation by one controller.",
+   "Exactly twelve months of data, not a day more and not a day less.",
+   "No more than the last seven days of activity before the review."
+  ],
+  "a": 0,
+  "rat": "Clause 6.4.1.4: Radar may provide strategic data. Datasets spanning anywhere from a single season to several years can reveal patterns of wildlife movements.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "What can the patterns revealed by strategic radar data be used for, per Clause 6.4.1.4?",
+  "options": [
+   "To replace the strike reports that operators send to the State authority each month.",
+   "To target habitat attractants and strategize mitigations that reduce the risk of wildlife hazards.",
+   "To set the landing fees that the aerodrome charges to each airline.",
+   "To decide which of the wildlife control staff should work on night shifts."
+  ],
+  "a": 1,
+  "rat": "Clause 6.4.1.4: The patterns can be used to target habitat attractants and strategize mitigations that reduce the risk of wildlife hazards.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "Which example of surveillance benefit for hard-to-reach areas does Clause 6.5.1 give?",
+  "options": [
+   "Counting the fish that live in a deep reservoir located outside the aerodrome fence.",
+   "Inspecting every runway edge light during a night inspection of the airfield.",
+   "Observing rooftops where nesting can be seen without having to climb the roof.",
+   "Measuring the depth of standing water on the apron after a heavy rainstorm."
+  ],
+  "a": 2,
+  "rat": "Clause 6.5.1: Surveillance RPAS can monitor areas that are difficult to access, for example observing nesting on rooftops without having to climb the roof.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "Which two properties of light can wildlife detect, according to Clause 6.6.1?",
+  "options": [
+   "The brightness of the lamp and the height of the source above the ground.",
+   "The polarisation of the beam and the age of the lamp that emits it.",
+   "The heat output of the fitting and the angle of the beam on the surface.",
+   "Flicker or pulse rate (frequency) and particular colours (wavelength)."
+  ],
+  "a": 3,
+  "rat": "Clause 6.6.1: Wildlife can detect flicker or pulse rates (frequency) as well as particular colours (wavelength), so lighting techniques can be used to deter them away from aircraft.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "Why may frequency and wavelength need to be adjusted, according to Clause 6.6.1?",
+  "options": [
+   "Different species may react to different lighting techniques.",
+   "Lamps gradually lose power as they warm up during a long night of operation.",
+   "Pilots state a different colour preference at the start of each new season.",
+   "Regulators publish a new required setting for every device each year."
+  ],
+  "a": 0,
+  "rat": "Clause 6.6.1: Frequency and wavelength may be adjusted, as different species may react to different lighting techniques.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "Why does Clause 6.7 say databases should be connected with reporting systems?",
+  "options": [
+   "So that every report is forwarded automatically to ICAO without any review at the aerodrome.",
+   "So that aerodrome personnel can input data directly into the database.",
+   "So that paper forms can be destroyed one week after the event is reported.",
+   "So that only senior managers can read the records of wildlife incidents."
+  ],
+  "a": 1,
+  "rat": "Clause 6.7: Databases should be connected with reporting systems so that aerodrome personnel can input data directly, and data can then be easily extracted to produce reports and trends.",
+  "ch": "Chapter 6"
+ },
+ {
+  "q": "Which two groups of people does Clause 7.1.1 say an aerodrome operator should adequately train in wildlife hazard management?",
+  "options": [
+   "Air traffic controllers and airline pilots.",
+   "Rescue and fire-fighting crews and guards.",
+   "Wildlife hazard control personnel and managers.",
+   "Airside contractors and retail staff."
+  ],
+  "a": 2,
+  "rat": "Clause 7.1.1: The operator should adequately train its wildlife hazard control personnel and managers in wildlife hazard management.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "According to Clause 7.1.1, training in wildlife hazard management should follow which kind of principles?",
+  "options": [
+   "Principles set by each airline for its own flight crews.",
+   "Classroom attendance hours counted per course.",
+   "Principles laid down by the local wildlife committee.",
+   "Recognized competency-based training principles."
+  ],
+  "a": 3,
+  "rat": "Clause 7.1.1: Training is conducted by competent personnel or specialists with proven experience, in accordance with recognized competency-based training principles.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Who does Clause 7.1.3 say should ensure that wildlife management personnel are competent?",
+  "options": [
+   "The aerodrome operator.",
+   "The wildlife control personnel themselves.",
+   "The air traffic service provider.",
+   "The aircraft operators using the aerodrome."
+  ],
+  "a": 0,
+  "rat": "Clause 7.1.3: An aerodrome operator should ensure that wildlife management personnel are competent.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "What does Clause 7.1.3 say potential wildlife management personnel should do to show they are competent?",
+  "options": [
+   "Pass a pilot medical examination and an aviation security check.",
+   "Complete a training programme and be tested, with the results kept on file.",
+   "Work a full year under supervision, with no assessment or record.",
+   "Attend one induction briefing from the manager and sign a form."
+  ],
+  "a": 1,
+  "rat": "Clause 7.1.3: Potential wildlife management personnel should complete a training programme and be tested, and the results recorded and kept on file.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Who may define the period for which training records are kept, according to Clause 7.1.3?",
+  "options": [
+   "The aircraft manufacturer.",
+   "An ICAO Council decision each year.",
+   "Local and national regulations.",
+   "The individual trainee."
+  ],
+  "a": 2,
+  "rat": "Clause 7.1.3: The record-keeping period may be defined by local and national regulations. Without such regulations, records are kept long enough to provide proof of competency.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "What is the purpose of recurrent training described in Clause 7.1.4?",
+  "options": [
+   "To replace the initial course once its certificate has formally expired.",
+   "To meet the yearly flight-hour currency rules of airline pilots.",
+   "To qualify staff for promotion into the wildlife manager post.",
+   "To keep personnel up to date with changes in wildlife hazard management."
+  ],
+  "a": 3,
+  "rat": "Clause 7.1.4: Recurrent training ensures that personnel are kept up to date with changes in wildlife hazard management at the aerodrome.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Clause 7.2.1 says the topics of which ICAO document should be covered in wildlife training, in addition to any others?",
+  "options": [
+   "PANS-Aerodromes (Doc 9981), Part II, Appendix 1 to Chapter 6.",
+   "The Aerodrome Design Manual, Part 1, Chapter 3.",
+   "Annex 13, Aircraft Accident and Incident Investigation.",
+   "The Manual on Certification of Aerodromes, Chapter 2."
+  ],
+  "a": 0,
+  "rat": "Clause 7.2.1: The topics in PANS-Aerodromes (Doc 9981), Part II, Appendix 1 to Chapter 6 should be covered and may be supplemented by the topics listed in the clause.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Which Clause 7.2.1 training topic covers the practical ways of taking wildlife off the aerodrome?",
+  "options": [
+   "Aircraft engine overhaul procedures.",
+   "Wildlife removal techniques.",
+   "Passenger baggage handling rules.",
+   "Pilot medical licensing standards."
+  ],
+  "a": 1,
+  "rat": "Clause 7.2.1 j: Wildlife removal techniques are topic j) in the list of training content.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Which Clause 7.2.1 training topic deals with the safe handling of the tools and substances used in wildlife control?",
+  "options": [
+   "Safe towing of aircraft on apron stands.",
+   "Safe operation of lighting regulators.",
+   "Safe use of firearms and hazardous materials.",
+   "Safe loading of cargo pallets."
+  ],
+  "a": 2,
+  "rat": "Clause 7.2.1 k: Safe use of firearms and hazardous materials is topic k) in the list of training content.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Which Clause 7.2.1 training topic is about explaining to people why wildlife control matters?",
+  "options": [
+   "The importance of passenger loyalty and reward programmes.",
+   "The importance of aircraft livery and branding standards.",
+   "The importance of terminal retail and concession planning.",
+   "The importance of awareness and outreach programmes."
+  ],
+  "a": 3,
+  "rat": "Clause 7.2.1 m: The importance of awareness and outreach programmes is topic m) in the list of training content.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Which Clause 7.2.1 training topic covers how animals live, feed and behave?",
+  "options": [
+   "Wildlife ecology and biology.",
+   "Aircraft engine thermodynamics.",
+   "Airport terminal passenger flow.",
+   "Airline fleet planning methods."
+  ],
+  "a": 0,
+  "rat": "Clause 7.2.1 e: Wildlife ecology and biology is topic e) in the list of training content.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Which Clause 7.2.1 training topic introduces trainees to the programme in force at their own aerodrome?",
+  "options": [
+   "An overview of the airline fleet plan.",
+   "An overview of the aerodrome WHMP.",
+   "An overview of terminal concession leases.",
+   "An overview of aircraft type certificates."
+  ],
+  "a": 1,
+  "rat": "Clause 7.2.1 d: An overview of the aerodrome WHMP is topic d) in the list of training content.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Which Clause 7.2.1 training topic makes trainees familiar with the rules and guidance that apply to them?",
+  "options": [
+   "Customs, immigration and quarantine clearance rules for arriving passengers.",
+   "Airline cargo acceptance rules, including dangerous goods documentation.",
+   "National and local regulations, standards and guidance material on aerodrome WHMPs.",
+   "Commercial leasing rules for terminal buildings, hangars and apron space."
+  ],
+  "a": 2,
+  "rat": "Clause 7.2.1 c: National and local regulations, standards and guidance material related to aerodrome WHMPs are topic c) in the list of training content.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Which Clause 7.2.1 training topic pairs the control of animals with the management of where they live?",
+  "options": [
+   "Management of aircraft ground-handling equipment.",
+   "Management of airline crew duty rosters.",
+   "Management of passenger complaints and refunds.",
+   "Management of hazardous wildlife and their habitat."
+  ],
+  "a": 3,
+  "rat": "Clause 7.2.1 b: Management of hazardous wildlife and their habitat is topic b) in the list of training content.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Who does Clause 7.2.4 say should ultimately determine which personnel are appointed to provide wildlife management training at the airport?",
+  "options": [
+   "The airport operator.",
+   "The State regulator, case by case.",
+   "The maker of the dispersal equipment.",
+   "The national bird-watching association."
+  ],
+  "a": 0,
+  "rat": "Clause 7.2.4: Personnel appointed to provide training should ultimately be determined by the airport operator.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "What evidence should a person appointed to provide wildlife management training be able to produce, according to Clause 7.2.4?",
+  "options": [
+   "A university degree in zoology with no practical field experience.",
+   "A formal course of instruction combined with professional experience.",
+   "A letter of recommendation from a landowner near the aerodrome.",
+   "Membership of an international society of professional ornithologists."
+  ],
+  "a": 1,
+  "rat": "Clause 7.2.4: Trainers should demonstrate proven competence and produce evidence that they have completed a formal course of instruction combined with professional experience.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "Clause 7.2.1 n refers to the basic principles of which system and how they apply to aerodrome wildlife hazard management?",
+  "options": [
+   "The air traffic flow management system.",
+   "The aerodrome emergency response system.",
+   "The safety management system (SMS).",
+   "The aeronautical information management system."
+  ],
+  "a": 2,
+  "rat": "Clause 7.2.1 n: Training should cover the basic principles of the safety management system and how they apply to aerodrome wildlife hazard management.",
+  "ch": "Chapter 7"
+ },
+ {
+  "q": "What does Clause 8.1.1 say should be established before operational notifications are implemented?",
+  "options": [
+   "A fixed list of the species that are allowed to be reported.",
+   "A charging scheme for notification services.",
+   "A single radio frequency reserved for wildlife.",
+   "Protocols allowing clear, concise communication."
+  ],
+  "a": 3,
+  "rat": "Clause 8.1.1: Protocols for clear, concise communication should be established before operational notifications are implemented, and included in the training requirements.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "When does Clause 8.1.1 say clear communication protocols become especially important?",
+  "options": [
+   "During active control of wildlife hazards and emergencies.",
+   "During routine grass cutting on quiet, low-traffic days at the airfield.",
+   "During annual training courses for newly hired staff.",
+   "During the preparation of the yearly operating budget."
+  ],
+  "a": 0,
+  "rat": "Clause 8.1.1: Clear communication becomes especially important during active control of wildlife hazards and emergencies.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "According to Clause 8.1.3, what should be uniformly developed and implemented among States?",
+  "options": [
+   "The fees charged for wildlife strike reporting services and databases.",
+   "Operational standards for procedures and training protocols.",
+   "The paint colours of wildlife control patrol vehicles.",
+   "The species lists printed in every aerodrome manual."
+  ],
+  "a": 1,
+  "rat": "Clause 8.1.3: Operational standards for procedures and training protocols should be uniformly developed and implemented among States.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "Who should provide training in procedures for altered flight operations based on hazard advisories, according to Clause 8.1.4?",
+  "options": [
+   "Aerodrome operators, with the training approved by ICAO directly.",
+   "Wildlife controllers, with the training monitored by the airlines.",
+   "Airlines, with the training developed and monitored by State regulatory agencies.",
+   "Air traffic controllers, with the training developed by pilots."
+  ],
+  "a": 2,
+  "rat": "Clause 8.1.4: Pilots have the authority to alter flight operations when hazard advisories are issued. Airlines provide the training, developed and monitored by State regulatory agencies.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "What do aerodrome operations and wildlife control personnel need from predictive-model or remote-sensing data, according to Clause 8.1.5?",
+  "options": [
+   "Only a general warning that birds are present somewhere in the wider area.",
+   "A monthly summary of the species counted in the surveys near the fence.",
+   "The identity and registration of the aircraft whose crew reported the hazard.",
+   "Detailed and specific information on the hazard level, time and location."
+  ],
+  "a": 3,
+  "rat": "Clause 8.1.5: Operations and control personnel need detailed and specific information on the level of hazard and its time and location, so that they can respond with control or dispersal equipment.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "Which technologies does Clause 8.1.6 name for the data links that alert people and agencies able to respond to hazard advisories?",
+  "options": [
+   "Wireless computer systems or cellular phone technology.",
+   "Telegraph lines or semaphore signals.",
+   "Satellite navigation beacons or Morse transmitters.",
+   "Postal reports or weekly printed bulletins."
+  ],
+  "a": 0,
+  "rat": "Clause 8.1.6: Data links are available through wireless computer systems or cellular phone technology.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "Under Clause 8.1.6, when should links to air traffic control give an audio or visual trigger?",
+  "options": [
+   "When any bird is seen on the aerodrome.",
+   "When threshold levels are met.",
+   "At every change of the controller on duty.",
+   "Once a day at a fixed time."
+  ],
+  "a": 1,
+  "rat": "Clause 8.1.6: Links to ATC should be established with appropriate audio or visual triggers when threshold levels are met.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "How should drivers report wildlife sightings, according to Clause 8.1.8?",
+  "options": [
+   "Use their own informal local wording on the radio so that each message stays very short and quick.",
+   "Wait until the end of the shift and write the sighting in the log book.",
+   "Follow the aerodrome's procedures, using correct radiotelephony and standard phraseology.",
+   "Report only to the wildlife manager by telephone and never over the radio."
+  ],
+  "a": 2,
+  "rat": "Clause 8.1.8: Drivers follow the procedures of their particular aerodrome for reporting sightings, with correct radiotelephony and standard phraseology.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "How does Clause 8.1.9 define essential aerodrome information?",
+  "options": [
+   "Information about passenger terminal services that is necessary for safe passenger flow.",
+   "Information about airline schedules that is necessary for safe aircraft sequencing.",
+   "Information about fuel supply that is necessary for safe aircraft refuelling operations.",
+   "Information about the manoeuvring area and its facilities that is necessary for safe aircraft operation."
+  ],
+  "a": 3,
+  "rat": "Clause 8.1.9: Essential aerodrome information is information regarding the manoeuvring area and its associated facilities which is necessary to ensure the safe operation of aircraft.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "How does Clause 8.2.1 describe an automatic terminal information service (ATIS)?",
+  "options": [
+   "A continuous broadcast of recorded aeronautical information for aerodromes and their immediate surroundings.",
+   "A scheduled printed bulletin of weather observations and forecasts sent to airline offices every morning.",
+   "A live voice service in which a controller answers every pilot question on request.",
+   "A digital database of aircraft registrations kept by the aerodrome operator."
+  ],
+  "a": 0,
+  "rat": "Clause 8.2.1: ATIS is a continuous broadcast of recorded aeronautical information for aerodromes and their immediate surroundings.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "Why does Clause 8.2.1 say it helps when pilots take notice of the ATIS before contacting the local control unit?",
+  "options": [
+   "It allows pilots to skip all contact with the control unit.",
+   "It reduces the controllers' workload and relieves frequency congestion.",
+   "It replaces the need for any NOTAM or pilot report that day.",
+   "It lets controllers speak to pilots in a different language."
+  ],
+  "a": 1,
+  "rat": "Clause 8.2.1: Pilots who take notice of ATIS broadcasts before contacting the local control unit reduce the controllers' workload and relieve frequency congestion.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "When is the ATIS recording updated, according to Clause 8.2.2?",
+  "options": [
+   "Once a day at the start of the morning shift, whatever changes happen.",
+   "Only when a pilot on the frequency asks the controller to update it.",
+   "At fixed intervals, or when there is a significant change in the information.",
+   "Once a month together with the publication of the AIP supplement."
+  ],
+  "a": 2,
+  "rat": "Clause 8.2.2: The recording is updated in fixed intervals or when there is a significant change in the information.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "What useful information about conservation can a NOTAM also provide, according to Clause 8.3.1?",
+  "options": [
+   "The market value of protected habitats near the site.",
+   "The names of the volunteers monitoring local nests.",
+   "The legal penalties for disturbing any wild animals.",
+   "The presence of threatened or endangered species."
+  ],
+  "a": 3,
+  "rat": "Clause 8.3.1: NOTAMs can also provide useful information concerning the presence of threatened or endangered species.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "Where does Clause 8.5 say more information on the contents of the aeronautical information publication can be found?",
+  "options": [
+   "PANS-AIM (Doc 10066), Appendix 2.",
+   "PANS-ATM (Doc 4444), Chapter 2.",
+   "Annex 14, Volume I, Chapter 9.",
+   "The Safety Management Manual (Doc 9859)."
+  ],
+  "a": 0,
+  "rat": "Clause 8.5: More information on the contents of the AIP is available in the PANS for Aeronautical Information Management (Doc 10066), Appendix 2.",
+  "ch": "Chapter 8"
+ },
+ {
+  "q": "Why does Clause 9.1.1.3 say the WHMP should involve stakeholders and external entities throughout its development?",
+  "options": [
+   "They are required to sign and approve every page of the WHMP before use.",
+   "They may be linked to the presence of wildlife, attracting habitats and land use.",
+   "They are responsible for paying for all of the wildlife control equipment.",
+   "They must carry out the wildlife patrols on behalf of the aerodrome operator."
+  ],
+  "a": 1,
+  "rat": "Clause 9.1.1.3: For the WHMP to be effective, different stakeholders and external entities need to be involved, since they may be linked to the presence of wildlife, attracting habitats and land use.",
+  "ch": "Chapter 9"
+ },
+ {
+  "q": "What should the aerodrome operator do in addition to the other responsibilities, according to Clause 9.1.2.2?",
+  "options": [
+   "Appoint an ICAO inspector who audits the WHMP on a monthly basis.",
+   "Delegate the whole WHMP to the airline that has the most movements.",
+   "Appoint a wildlife manager or coordinator for all wildlife hazard management tasks.",
+   "Hire a different external consultant every year to rewrite the programme."
+  ],
+  "a": 2,
+  "rat": "Clause 9.1.2.2: The aerodrome operator should appoint a wildlife manager or coordinator who will coordinate all tasks related to wildlife hazard management associated to the WHMP.",
+  "ch": "Chapter 9"
+ },
+ {
+  "q": "What does Clause 9.1.5.2 say the WHMP should include about the resources used for wildlife management tasks?",
+  "options": [
+   "Only the resources that were purchased during the last financial year.",
+   "The brand of the radios that the air traffic controllers use.",
+   "A statement that equipment is optional at smaller aerodromes.",
+   "The resources used, for example vehicles, pyrotechnics and traps."
+  ],
+  "a": 3,
+  "rat": "Clause 9.1.5.2: The WHMP should include the resources used to perform wildlife management tasks, for example vehicles, pyrotechnics and traps.",
+  "ch": "Chapter 9"
+ },
+ {
+  "q": "What does Clause 9.2.7 say performance indicators should be?",
+  "options": [
+   "Metrics obtained and measured in a simple way, and clear about what they measure.",
+   "Complex composite scores that only a trained statistician can calculate.",
+   "Metrics that are kept confidential from the wildlife control personnel.",
+   "Measures of the cost of the equipment, not of the effect on strike risk."
+  ],
+  "a": 0,
+  "rat": "Clause 9.2.7: Performance indicators should be metrics obtained and measured in a simple way, and which are clear about what they measure.",
+  "ch": "Chapter 9"
+ },
+ {
+  "q": "What does Clause 9.1.7.2 say the WHMP should include for personnel involved in wildlife control and wildlife hazard management?",
+  "options": [
+   "A guarantee of employment after the first training course.",
+   "Procedures for initial and recurrent training.",
+   "Training only for the wildlife manager and no other staff.",
+   "A one-time induction with no refresher training afterwards."
+  ],
+  "a": 1,
+  "rat": "Clause 9.1.7.2: The WHMP should include procedures for the initial and recurrent training of personnel involved in wildlife control and in wildlife hazard management.",
+  "ch": "Chapter 9"
+ }
+];
+
+    // ─── QUESTION BANK (v12) ─────────────────────────────────────────────────
+    // Every question has a stable id (hash of the stem and the correct option). Each chapter quiz draws 10
+    // questions from that chapter's bank; the master exam draws from the whole bank. Questions are marked
+    // as seen when an attempt is SUBMITTED, and the next draw takes unseen questions first.
+    const SEEN_KEY = 'sbs_quiz_seen';
+    function qid(q) {
+        const t = String(q.q) + '|' + String(q.options[q.a]); let h = 2166136261;
+        for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0).toString(36);
+    }
+    const MASTER_POOL = (function () {
+        const out = [], ids = new Set();
+        const all = ICAO_MODULES.slice(1).flatMap(m => (m.questions || []).map(q => ({...q, chapter: m.navTitle})))
+            .concat(MASTER_EXTRA.map(q => ({...q, chapter: q.ch})))
+            .concat(NEW_Q.map(q => ({...q, chapter: q.ch})));
+        all.forEach(q => { const id = qid(q); if (ids.has(id)) return; ids.add(id); out.push({...q, id}); });
+        return out;
+    })();
+    const QBANK = (function () {
+        const out = {};
+        ICAO_MODULES.forEach((m, i) => { if (i > 0 && m.questions && m.questions.length) out[i] = MASTER_POOL.filter(q => q.chapter === m.navTitle); });
+        return out;
+    })();
+    function seenLoad() { try { const o = JSON.parse(sbsStorage.getItem(SEEN_KEY) || '{}'); return (o && typeof o === 'object' && !Array.isArray(o)) ? o : {}; } catch (e) { return {}; } }
+    function seenMark(key, ids) {
+        try {
+            const o = seenLoad(); const drop = new Set(ids);
+            o[key] = (Array.isArray(o[key]) ? o[key] : []).filter(x => !drop.has(x)).concat(ids);
+            sbsStorage.setItem(SEEN_KEY, JSON.stringify(o));
+        } catch (e) {}
+    }
+    // Unseen questions first (random order); if fewer than n are unseen, fill with the least recently seen.
+    function drawBank(key, pool, n) {
+        n = Math.min(n, pool.length);
+        const o = seenLoad(); const list = Array.isArray(o[key]) ? o[key] : [];
+        const rank = new Map(list.map((id, i) => [id, i]));
+        const unseen = fisherYates(pool.filter(q => !rank.has(q.id)));
+        let pick = unseen.slice(0, n);
+        if (pick.length < n) {
+            const older = pool.filter(q => rank.has(q.id)).sort((a, b) => rank.get(a.id) - rank.get(b.id));
+            pick = pick.concat(older.slice(0, n - pick.length));
+        }
+        return { items: fisherYates(pick), unseen: unseen.length, total: pool.length };
+    }
+    function setQuizNote(d, n) {
+        const el = document.getElementById('quizBankNote'); if (!el) return;
+        el.textContent = d.unseen >= n
+            ? `${n} questions drawn from a bank of ${d.total}. A failed attempt is followed by a completely new set.`
+            : `${n} questions drawn from a bank of ${d.total}. You have seen most of the bank, so some questions repeat, starting with the ones you saw longest ago.`;
+    }
 
     // ─── STATE HELPERS ───────────────────────────────────────────────────────
     function saveState() {
@@ -4118,7 +5154,10 @@
         STATE.isMasterExam = false;
         document.getElementById('quizTitle').textContent = `${mod.navTitle}: Knowledge Assessment`;
         // Shuffle answer positions for each question
-        const shuffled = mod.questions.map(q => shuffleQuestion(q));
+        const bank = QBANK[idx];
+        let shuffled;
+        if (bank && bank.length >= 10) { const d = drawBank(String(idx), bank, 10); shuffled = d.items.map(q => shuffleQuestion(q)); setQuizNote(d, 10); }
+        else { shuffled = mod.questions.map(q => shuffleQuestion(q)); setQuizNote({ unseen: 0, total: shuffled.length }, shuffled.length); }
         renderQuizQuestions(shuffled, idx);
         document.getElementById('view-quiz').classList.remove('hidden');
         document.getElementById('quizContainer').scrollTop = 0;
@@ -4155,6 +5194,7 @@
             return;
         }
         const ctx = STATE.currentViewContext;
+        try { seenMark(STATE.isMasterExam ? 'master' : String(ctx.idx), questions.map(q => q.id).filter(Boolean)); } catch (e) {}
         let correct = 0;
         const feedbackItems = questions.map((q, i) => {
             const chosen = STATE.examAnswers[i];
@@ -4173,7 +5213,7 @@
         icon.className = `inline-flex justify-center items-center w-16 h-16 rounded-full mb-4 text-3xl ${passed ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`;
         icon.innerHTML = `<i class="fa-solid ${passed ? 'fa-trophy' : 'fa-rotate-right'}"></i>`;
         document.getElementById('feedbackTitle').textContent = passed ? 'Assessment Passed!' : 'Review Required';
-        document.getElementById('feedbackSubtitle').textContent = passed ? `Excellent work — you demonstrated solid understanding of this material.` : `You need 60% to advance. Review the material and try again.`;
+        document.getElementById('feedbackSubtitle').textContent = passed ? `Excellent work — you demonstrated solid understanding of this material.` : `You need 60% to advance. Review the material and try again. Your next attempt uses a new set of questions.`;
         document.getElementById('feedbackScoreDisplay').innerHTML = `<span class="${passed ? 'text-emerald-400' : 'text-rose-400'}">${score}%</span> <span class="text-slate-500 text-lg font-normal">(${correct}/${total} correct)</span>`;
         const fl = document.getElementById('feedbackList');
         fl.innerHTML = items.map((item, i) => `
@@ -4245,8 +5285,12 @@
         STATE.examAnswers = {};
         STATE.isMasterExam = true;
         STATE.currentViewContext = { type: 'master' };
-        const pool = fisherYates([...MASTER_POOL]).slice(0, Math.min(count, MASTER_POOL.length));
-        const shuffled = pool.map(q => shuffleQuestion(q));
+        const d = drawBank('master', MASTER_POOL, count);
+        const shuffled = d.items.map(q => shuffleQuestion(q));
+        const noteEl = document.getElementById('quizBankNote');
+        if (noteEl) noteEl.textContent = d.unseen >= shuffled.length
+            ? `${shuffled.length} questions drawn from a bank of ${d.total}. All of them are new to you.`
+            : `${shuffled.length} questions drawn from a bank of ${d.total}. Unseen questions come first, then the ones you saw longest ago.`;
         document.getElementById('quizTitle').textContent = `Master Certification Exam — ${shuffled.length} Questions`;
         renderQuizQuestions(shuffled, -1);
         document.getElementById('view-quiz').classList.remove('hidden');
@@ -4355,6 +5399,7 @@
         sbsStorage.removeItem('sbs_pending_reg');
         sbsStorage.removeItem('sbs_delivery_log');
         sbsStorage.removeItem('sbs_known_emails');
+        sbsStorage.removeItem(SEEN_KEY);
         wbResetAll();
         rcResetAll();
         // Wipe full STATE object in memory
